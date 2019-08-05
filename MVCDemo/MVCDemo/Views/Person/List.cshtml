@@ -1,0 +1,31 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>List</title>
+    </head>
+    <body>
+        <a href="~/Person/Add">新增用户</a>@*注意我们的这个超链接对应的是[HttpGet]特性的Add()*@
+        <table>
+            <thead>
+                <tr><td>姓名</td><td>年龄</td><td>班级</td><td>邮箱</td><td>编辑</td><td>删除</td></tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow  row in Model.Rows)
+                {
+                    <tr><td>@row["Name"]</td><td>@row["Age"]</td><td>@row["ClassId"]</td><td>@row["Email"]</td><td><a href="~/Person/Edit?Id=@(row["Id"])">编辑</a></td><td><a href="~/Person/Delete?Id=@(row["Id"])">删除</a></td></tr>
+                }
+            </tbody>
+        </table>
+        <div>
+
+        </div>
+    </body>
+</html>

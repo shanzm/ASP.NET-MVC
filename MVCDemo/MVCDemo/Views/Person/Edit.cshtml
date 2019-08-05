@@ -1,0 +1,25 @@
+﻿@model MVCDemo.Models .Person
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div> 
+        <form action="~/Person/Edit" method="post" >
+            <input type="hidden"  name="Id" value="@Model.Id " />
+            姓名：<input type="text" name="Name" value="@Model.Name" /><br />
+            年龄：<input type="text" name="Age" value="@Model.Age" /><br />
+            邮箱：<input type="text" name="Email" value="@Model.Email" /><br />
+            班级：<input type="text" name="ClassId" value="@Model.ClassId" /><br />
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+</body>
+</html>
