@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @RenderSection("Header")
+    <p>welcome!</p>
+    <div>
+        @RenderBody()
+    </div>
+
+    <div>
+        @if (IsSectionDefined("ab"))
+        {
+            @RenderSection("ab")
+        }
+        else
+        {
+             <text>这是默认显示的内容</text> 
+        }
+
+    </div>
+    <p>goodbye!</p>
+    @RenderSection("Footer")
+</body>
+</html>

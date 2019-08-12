@@ -1,4 +1,4 @@
-﻿using MVCDemo.Models;
+﻿using DropDownList1.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MVCDemo.Controllers
+namespace DropDownList1.Controllers
 {
     public class PersonController : Controller
     {

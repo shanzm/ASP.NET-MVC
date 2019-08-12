@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "LayoutTest";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@section Header
+{
+    这是用来替换Layout中的RenderSection("Header")的内容
+}
+
+
+<h2>LayoutTesthhhhhhhhhhhhhhhhhhhhh</h2>
+
+这句话是填充_LayoutPage1.cshtml页面的@@RenderBody()<br />
+
+@*@section ab
+{
+    这是替换@RenderSection("ab")，当然不替换也可以，因为我们在Layout页面做了判断，不替换就会显示默认的内容
+}*@
+
+@section Footer
+{
+    这是用来替换Layout中的RenderSection("Footer")的内容
+}

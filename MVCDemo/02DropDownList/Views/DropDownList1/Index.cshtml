@@ -1,0 +1,26 @@
+﻿@model List<Person>   
+    @*注意我们为了使用Person 类型，在View文件夹下的web.config中添加了Person的命名空间*@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <select>
+        @foreach (Person p in Model)
+        {
+            <option selected="@(p.Id ==2)">@p.Name</option>
+            //是否还记得：html标签中属性值是一个C#的布尔类型变量，
+            //如果这个布尔类型的变量时false那么就不会在html中显示这个属性，
+            //是true则显示“属性名=属性名”的样子。主要是用在checkbox和DropDownList
+            //在这里若是Id为2，则selected=true,则显示selected=selected,即选中该项
+        }
+    </select>
+</body>
+</html>

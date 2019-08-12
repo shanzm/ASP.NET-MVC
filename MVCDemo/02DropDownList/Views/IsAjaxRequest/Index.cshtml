@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+            $("#btn1").click(function ()
+            {
+                $.ajax({
+                    url: "/IsAjaxRequest/Index1",
+                    type: "post",
+                    dataType:"json",
+                    success: function (res)
+                    {
+                        alert(res.Name);
+                    },
+                    error: function ()
+                    {
+                        alert("error");
+                    }
+                })
+            })
+            
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <button id="btn1">按钮</button>
+    </div>
+</body>
+</html>

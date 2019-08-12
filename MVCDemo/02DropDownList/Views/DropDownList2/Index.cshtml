@@ -1,0 +1,33 @@
+﻿@*@model List<SelectListItem>*@
+@model IEnumerable<SelectListItem>
+@*你写@model IEnumerable<SelectListItem >也是可是的，毕竟List是实现IEnumberable接口的*@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        .info{
+            background-color:red ;
+        }
+    </style>
+</head>
+<body>
+    @Html.DropDownList("pid", Model, new { aaa = "ccc", @class = "info", onchange = "JavaScript:alert('OK')" })
+    @*
+    注意：
+    @Html.DropDownList()的第一个参数string name是<select>标签的名字，且id 属性的值默认和 name 一致
+    @Html.DropDownList (）的第二个参数IEnumberable<SelectListItme>selectList,就是我们传递来的List<SelectListItme>类型的集合
+    @Html.DropDownList("pid", Model)可以设置第三个参数：匿名类，从而实现给<select>设置属性
+        比如 @Html.DropDownList("pid", Model，new｛aaa="ccc",@calss="info"｝),从而显示的网页<select aaa="ccc" class="info">
+        通过修改<select>的标签就可以修改其样式
+        注意我们在@Html.DropDownList的第三个参数是一个匿名类，你写啥，显示啥，所以你也可以写javaScript语句
+        for example：new ｛onchange="JavaScript:alert("OK")"}
+    *@
+</body>
+</html>
