@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\CHPhoneNumber.cs" />
     <Compile Include="Controllers\CheckDataController.cs" />
     <Compile Include="Controllers\DropDownList1Controller.cs" />
     <Compile Include="Controllers\DropDownList2Controller.cs" />
@@ -105,6 +106,7 @@
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\QQNumberAtrribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

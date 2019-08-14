@@ -50,7 +50,7 @@ namespace _02DropDownList.Controllers
             StringBuilder sb = new StringBuilder();
             foreach (var propName in modelState.Keys)
             {
-                if (modelState[propName].Errors.Count()<=0)//相当于：If(  ! modelState[propName].Errors.Ang()，Any()函数：如果有数据则返回true ，否则返回false
+                if (modelState[propName].Errors.Count() <= 0)//相当于：If(!modelState[propName].Errors.Ang()，Any()函数：如果有数据则返回true ，否则返回false
                 {
                     continue;
                 }
