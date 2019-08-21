@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DropDownList1.Controllers
+namespace MVCDemo.Controllers
 {
     public class LayoutTestController : Controller
     {

@@ -19,6 +19,7 @@ namespace _02DropDownList.Common
             //注意这里我们给ErrorMessage的属性设置默认值，但是在我们使用这个特性的时候，可以重新赋值，覆盖掉默认值
             //如[QQNumber(ErrorMessage="qq号码格式不正确")]
             this.ErrorMessage = "字段{0}不是合法的QQ，正确QQ为5到10位数字";
+            
         }
     }
 }

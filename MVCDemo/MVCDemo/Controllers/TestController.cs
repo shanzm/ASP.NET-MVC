@@ -1,11 +1,12 @@
-﻿using DropDownList1.Models;
+﻿using MVCDemo.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DropDownList1.Controllers
+namespace MVCDemo.Controllers
 {
     public class TestController : Controller
     {
