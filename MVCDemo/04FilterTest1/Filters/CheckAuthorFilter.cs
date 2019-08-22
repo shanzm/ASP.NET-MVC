@@ -27,10 +27,10 @@ namespace _04FilterTest1.Filters
                     filterContext.Result = contentResult;
                 }
                 //实现：若是用户amdinq请求MainController，则...
-                if ((filterContext.HttpContext.Session["username"].ToString() == "admin")&&contrrollerName=="Main")
-                {
+                //if ((filterContext.HttpContext.Session["username"].ToString() == "admin")&&contrrollerName=="Main")
+                //{
 
-                }
+                //}
             }
         }
     }
