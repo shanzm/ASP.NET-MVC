@@ -21,6 +21,7 @@ namespace _04FilterTest1
             //添加自定义的Filter
             GlobalFilters.Filters.Add(new LogActionFilter());
 
+            GlobalFilters.Filters.Add(new ExceptionFilter());
         }
     }
 }

@@ -26,5 +26,21 @@ namespace _04FilterTest1.Controllers
                 return Content("登录失败");
             }
         }
+
+
+        ///注意我们调试的时候选择调试-开始执行（不调试）
+        public ActionResult TestException()
+        {
+            //Exception ex = new Exception("自定义的一个异常");
+            //throw ex;
+
+            string a = null;
+            a.ToString();
+
+            return View();
+
+
+
+        }
     }
 }
