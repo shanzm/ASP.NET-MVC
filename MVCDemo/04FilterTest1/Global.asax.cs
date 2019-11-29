@@ -18,8 +18,9 @@ namespace _04FilterTest1
             //添加自定义的Filter
             GlobalFilters.Filters.Add(new CheckAuthorFilter());
 
+            //添加自定义的Filter
+            GlobalFilters.Filters.Add(new LogActionFilter());
 
-           // test--使用VS，commit 某一个文件
         }
     }
 }

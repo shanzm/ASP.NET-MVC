@@ -15,7 +15,7 @@ namespace MVCDemo.Controllers
         {
             model.Result = model.Num1 + model.Num2;
             ViewData["name"] = "shanzm1";
-            ViewBag.name = "shanzm2";
+            //ViewBag.name = "shanzm2";
 
             return View(model);
         }

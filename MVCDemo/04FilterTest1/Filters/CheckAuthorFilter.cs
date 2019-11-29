@@ -23,10 +23,17 @@ namespace _04FilterTest1.Filters
             {
                 if (filterContext.HttpContext.Session["username"] == null)
                 {
+                    //检测到未登录则显示"当前用户未登录，请。。。"
                     ContentResult contentResult = new ContentResult() { Content = "当前用户没有登录，请登录后访问！(这是使用IAuthorizationFilter进行检验的)" };
                     filterContext.Result = contentResult;
+
+                    //检测到未登录则跳转到登录页面
+                    //RedirectResult  contentResult = new RedirectResult("/Login/Index");
+                    //filterContext.Result = contentResult;
                 }
-                //实现：若是用户amdinq请求MainController，则...
+
+
+                //实现：若是用户amdin请求MainController，则...
                 //if ((filterContext.HttpContext.Session["username"].ToString() == "admin")&&contrrollerName=="Main")
                 //{
 

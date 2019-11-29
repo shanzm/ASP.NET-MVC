@@ -13,7 +13,7 @@ namespace _04FilterTest1.Controllers
         ///使用admin,12345登录
         ///显示登录成功后，就会把name把Seesion中
         ///之后我们在运行http://localhost:57920/Main/Index
-        ///应为与服务器没有断开连接，所以Seesion["name"]!=null,即用户已经登录
+        ///因为与服务器没有断开连接，所以Seesion["name"]!=null,即用户已经登录
         // GET: Mian
         public ActionResult Index()
         {
@@ -30,7 +30,9 @@ namespace _04FilterTest1.Controllers
 
             #region 使用OnAuthorization（）
             //在Global.asax中添加：GlobalFilters.Filters.Add(new CheckAuthorFilter());
-            return Content("当前用户已登录，你可以继续进行其他操作");
+           
+            ViewBag.content= "当前用户已登录，你可以继续进行其他操作";
+            return View(); 
             #endregion
 
         }

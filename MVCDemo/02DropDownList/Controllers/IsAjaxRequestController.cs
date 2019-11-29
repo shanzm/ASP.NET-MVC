@@ -16,7 +16,7 @@ namespace _02DropDownList.Controllers
         ///我们在Jquery代码中设置请求为/IsAjaxRequest/Index1
         ///此时Index1()函数判断为是Ajax请求，则返回Josn(p)
         ///最终显示的是p.Name
-        ///而我们判断是否是Ajax请求的使用的就是IsAjaxRequest这个方法
+        ///而我们判断是否是Ajax请求的使用的就是Request.IsAjaxRequest()这个方法
         ///原理是主流的浏览器在发送Ajax请求的时候会在报文头中添加：X-Requested-With：IsAjaxRequest
         ///我们判断就是根据请求的报文头中是否有：X-Requested-With：IsAjaxRequest
 

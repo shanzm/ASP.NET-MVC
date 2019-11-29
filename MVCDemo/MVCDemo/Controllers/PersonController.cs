@@ -25,23 +25,39 @@ namespace DropDownList1.Controllers
         }
 
         [HttpPost]
-        //注意这里使用的是一般类型的数据，仅作演示。
+
         //从Add.cshtml页面表单提交过往，调用的是这个Add()
         //表单中的input标签的value值作为这里的参数（标签的name属性和参数名一一对应，大小写不敏感）
-        public ActionResult Add(string name, int age, string email, int classId)
+
+        #region 把Add.cshtml文件中的表单的提交的数据当作是一般参数
+        //public ActionResult Add(string name, int age, string email, int classId)
+        //{
+        //    SqlParameter[] param =
+        //    {
+        //       new  SqlParameter ("@Name",name),
+        //       new SqlParameter ("@Age" ,age),
+        //       new SqlParameter ("@Email",email),
+        //       new SqlParameter ("@ClassId",classId)
+        //    };
+        //    SqlHelper.ExecuteNonquery("insert into T_Person (Name,Age,Email,ClassId) values(@Name,@Age,@Email,@ClassId);", CommandType.Text, param);
+
+        //    return Redirect("~/Person/List");
+        //}
+
+        #endregion 
+        public ActionResult Add(Person model)
         {
             SqlParameter[] param =
             {
-               new  SqlParameter ("@Name",name),
-               new SqlParameter ("@Age" ,age),
-               new SqlParameter ("@Email",email),
-               new SqlParameter ("@ClassId",classId)
+               new  SqlParameter ("@Name",model.Name ),
+               new SqlParameter ("@Age" ,model.Age),
+               new SqlParameter ("@Email",model.Email),
+               new SqlParameter ("@ClassId",model.ClassId )
             };
             SqlHelper.ExecuteNonquery("insert into T_Person (Name,Age,Email,ClassId) values(@Name,@Age,@Email,@ClassId);", CommandType.Text, param);
 
             return Redirect("~/Person/List");
         }
-
 
         [HttpGet]
         public ActionResult Edit(long id)

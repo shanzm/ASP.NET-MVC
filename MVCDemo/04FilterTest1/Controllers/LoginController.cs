@@ -16,7 +16,7 @@ namespace _04FilterTest1.Controllers
 
         public ActionResult Login(string username, string password)
         {
-            if (username == "admin" && password == "12345")
+            if (username == "admin" && password == "123456")
             {
                 Session["username"] = username;
                 return Content(username + "登录成功");
