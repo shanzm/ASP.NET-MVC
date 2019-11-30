@@ -16,7 +16,7 @@ namespace _04FilterTest1
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             //添加自定义的Filter
-            GlobalFilters.Filters.Add(new CheckAuthorFilter());
+            GlobalFilters.Filters.Add(new CheckAuthorityFilter());
 
             //添加自定义的Filter
             GlobalFilters.Filters.Add(new LogActionFilter());

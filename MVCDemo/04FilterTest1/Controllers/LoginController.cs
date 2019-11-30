@@ -1,6 +1,8 @@
-﻿using System;
+﻿using _04FilterTest1.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,14 +35,20 @@ namespace _04FilterTest1.Controllers
         {
             //Exception ex = new Exception("自定义的一个异常");
             //throw ex;
-
             string a = null;
             a.ToString();
 
             return View();
+        }
 
 
-
+        ///注意这里使用的是自定义的过滤器特性
+        ///因为我们没有在global.asax中添加，所以这个ResultFilter过滤器只是针对这个action
+        [ResultFilter]
+        public ActionResult TestResultFilter()
+        {
+            Thread.Sleep(2000);
+            return View();
         }
     }
 }

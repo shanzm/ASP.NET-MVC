@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace _04FilterTest1.Filters
 {
-    public class CheckAuthorFilter : IAuthorizationFilter
+    public class CheckAuthorityFilter : IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
