@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateURL</title>
+</head>
+<body>
+    <div>
+        @*Html.RouteLink()根据符合的路由规则生成：<a href="/Home/about/1">to index</a>;*@
+        @Html.RouteLink("这是一个超链接to index", new { controller = "Home", action = "about", id = "1" });<br />
+        @*按照指定的名为“blogs”的路由规则生成的是“/2019/02/02”*@
+        @Url.RouteUrl("blogs", new { year = "2019", month = "02", day = "02" });
+    </div>
+</body>
+</html>

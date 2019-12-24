@@ -56,6 +56,18 @@ namespace _007传统路由
             //传统路由中约束类型，等价于特性路由中｛id：int｝
             //添加命名空间using System.Web.Mvc.Routing.Constraints;
             routes.MapRoute("onlyint", "{controller}/{action}/{id}", null, new { id = new IntRouteConstraint() });
+
+
+            #region 选择传统路由还是特性路由
+            //1.首先二者可以混用
+            //2.传统路由的优点：可以集中配置所有的路由，传统路由比特性路由灵活
+            //3.特性路由的优点：路由和操作代码保存在一起
+            #endregion
+
+
+            //routes.MapRoute(）的第一个参数是路由规则的名字
+            //这个名字有什么用？我们可以在View页面使用Html辅助函数：@Html.RouteLink()来生成URL
+            //也可以使用@Url.RouteUrl()来生成URL，具体见本项目中的CreateURL.cshtml
         }
     }
 }

@@ -23,3 +23,16 @@
 * 1.1 检验是否登录--CheckAuthorFilter.cs
 * 1.2 日志：记录访问信息--LogActionFilter.cs
 * 1.3 记录异常信息--ExceptionFilter.cs
+
+
+5. 05Html辅助类
+   不建议使用，但是Html.DropDownList()还是挺方便的
+* 1.1 Html.BeginForm()等
+* 1.2 Html.validationMessage()和Html.validationSummary()
+
+6. 006特性路由、
+* 在RoutesConfig.cs中RegisterRoutes（）中routes.MapMVCAttributeRoutes()
+
+7. 007传统路由
+* 路由规则，默认路由，路由顺序，路由约束
+* 选择传统路由还是特性路由

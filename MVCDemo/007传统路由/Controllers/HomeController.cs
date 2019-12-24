@@ -19,5 +19,10 @@ namespace _007传统路由.Controllers
         {
             return Content(id.ToString());
         }
+
+        public ActionResult CreateURL()
+        {
+            return View();
+        }
     }
 }
