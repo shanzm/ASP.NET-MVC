@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @* Html.BeginForm("Index", "Home")第一个参数是Action名，第二个参数是控制器名（注意不需要写"Controller"）
+        生成 < form action = "/Home/Index" method = "post" ></ form >*@
+    @*Html.TextBox("text", "textvalue")第一个参数是id和name属性的值，第二个参数是value值
+        生成<input id="text" name="text" type="text" value="textvalue" />*@
+    @*我们有时候想要给某个自定义的属性赋值，就可以使用匿名类
+        比如想要设置样式为定义的warm类的样式，就可以添加其class属性值为“warm”
+        生成<input class="warn" id="name" name="name" type="text" v-id="5" value="hello" />,这样就可以设置样式表了*@
+    <div>
+        @using (Html.BeginForm("Index", "Home"))
+        {
+            @Html.TextBox("text", "textvalue")
+            @Html.TextBox("name", "hello", new { @class = "warn", v_id = 5 })
+        }
+    </div>
+</body>
+</html>
