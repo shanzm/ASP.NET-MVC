@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DropDownList1.Models;
 using System.Text;
 using System.Collections;
+using _002CheckData.Models;
 
-namespace _02DropDownList.Controllers
+namespace _002CheckData.Controllers
 {
     public class CheckDataController : Controller
     {
@@ -31,6 +31,8 @@ namespace _02DropDownList.Controllers
         //ModelState从何而来？里面存放的是什么？
         //首先只要是.cshtml页面发送请求，则控制器的ModelState属性就会接收到值
         //接收的是Model属性类型错误的一个键值对数据，而且一个Model属性的错误可能是多个（也就是一个key对应多个vallue）
+
+        //调试：http://localhost:54869/CheckData/Index?age=12&name=shanzm&phone=18860123456 则可以通过
 
         public ActionResult Index(Person p)
         {
