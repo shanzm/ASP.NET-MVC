@@ -24,7 +24,7 @@
     
     <appender name="RollingFileTracer" type="log4net.Appender.RollingFileAppender,log4net">
       <param name="File" value="App_Data/Log/" /><!--日志文件的保存位置为：App_Data/Log/Log.txt-->
-      <param name="AppendToFile" value="false" /><!--日志文件为后续内容附加到已有文件（若是false，则为后续覆盖向前的内存）-->
+      <param name="AppendToFile" value="true" /><!--日志文件为后续内容附加到已有文件（若是false，则为后续覆盖向前的内存）-->
       <param name="RollingStyle" value="Composite" /><!--根据文件的大小和日期滚动文件-->
       <param name="MaxSizeRollBackups" value="10" /><!--备份文件的个数-->
       <param name="MaximumFileSize" value="1MB" /><!--如果我们将最大文件大小设置为1MB并将maxSizeRollBackups设置为10 MB，那么根据日期或文件大小，它将只保留最后10MB的文件-->
