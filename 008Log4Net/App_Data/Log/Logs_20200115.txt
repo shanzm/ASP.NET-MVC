@@ -1,0 +1,9 @@
+2020-01-15 22:19:46,308 [6] DEBUG _008Log4Net.Controllers.HomeController - Hi I am log4net Debug Level
+2020-01-15 22:19:46,319 [6] INFO  _008Log4Net.Controllers.HomeController - Hi I am log4net Info Level
+2020-01-15 22:19:46,320 [6] WARN  _008Log4Net.Controllers.HomeController - Hi I am log4net Warn Level
+2020-01-15 22:19:46,346 [6] ERROR _008Log4Net.Controllers.HomeController - Hi I am log4net Error Level
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 _008Log4Net.Controllers.HomeController.Index() 位置 F:\ForGit\ASP.NET MVC\008Log4Net\Controllers\HomeController.cs:行号 29
+2020-01-15 22:19:46,351 [6] FATAL _008Log4Net.Controllers.HomeController - Hi I am log4net Fatal Level
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 _008Log4Net.Controllers.HomeController.Index() 位置 F:\ForGit\ASP.NET MVC\008Log4Net\Controllers\HomeController.cs:行号 29
