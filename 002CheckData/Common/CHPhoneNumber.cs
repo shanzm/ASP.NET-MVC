@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace _002CheckData.Common
+namespace _003DropDownList.Common
 {
     //继承于ValidationAttribute，实现
     public class CHPhoneNumber : ValidationAttribute

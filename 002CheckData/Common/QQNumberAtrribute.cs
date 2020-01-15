@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace _002CheckData.Common
+namespace _003DropDownList.Common
 {
     //注意只要我们定义的属性类的名字是以Attribute结尾的那么我们在使用这个属性的时候是可以省略“Attribute”的
     //比如说，我们在使用下面我们定义的这个特性的实话，可以直接标注[QQNumber]

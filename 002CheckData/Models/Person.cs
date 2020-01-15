@@ -1,11 +1,11 @@
-﻿using _002CheckData.Common;
+﻿using _003DropDownList.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace _002CheckData.Models
+namespace _003DropDownList.Models
 {
     public class Person
     {
