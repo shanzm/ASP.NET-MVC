@@ -94,16 +94,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <None Include="Web.config">
+    <None Include="Web.config[每一天放在一个文件夹，妹一分钟一个文件]">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.Debug.config[每一天放在一个文件夹，妹一分钟一个文件]">
+      <DependentUpon>Web.config[每一天放在一个文件夹，妹一分钟一个文件]</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.Release.config[每一天放在一个文件夹，妹一分钟一个文件]">
+      <DependentUpon>Web.config[每一天放在一个文件夹，妹一分钟一个文件]</DependentUpon>
     </None>
-    <None Include="Web.config[调试的时候删除本文字]">
+    <None Include="Web.config[实现日志分等级记录在不同的日志文件中]">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config[实现日志分等级记录在不同的日志文件中]">
+      <DependentUpon>Web.config[实现日志分等级记录在不同的日志文件中]</DependentUpon>
+    </None>
+    <None Include="Web.Release.config[实现日志分等级记录在不同的日志文件中]">
+      <DependentUpon>Web.config[实现日志分等级记录在不同的日志文件中]</DependentUpon>
+    </None>
+    <None Include="Web.config[简单示例]">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -118,11 +127,11 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <None Include="Web.Debug.config[调试的时候删除本文字]">
-      <DependentUpon>Web.config[调试的时候删除本文字]</DependentUpon>
+    <None Include="Web.Debug.config[简单示例]">
+      <DependentUpon>Web.config[简单示例]</DependentUpon>
     </None>
-    <None Include="Web.Release.config[调试的时候删除本文字]">
-      <DependentUpon>Web.config[调试的时候删除本文字]</DependentUpon>
+    <None Include="Web.Release.config[简单示例]">
+      <DependentUpon>Web.config[简单示例]</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
