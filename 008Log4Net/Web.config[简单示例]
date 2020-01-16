@@ -7,8 +7,6 @@
 <configuration>
   
   <!-- ...................................为Log4Net添加的配置.....开始.................................-->
-  <!--注意："<configSections>"节点必须配置在<configuration>之后的第一个位置，
-  否则报错，提示：只允许一个 <configSections> 元素。它必须是根 <configuration> 元素的第一个子元素-->
   <configSections>
     <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler,log4net" />
   </configSections>
