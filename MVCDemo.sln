@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "002CheckData", "002CheckDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "003DropDownList", "003DropDownList\003DropDownList.csproj", "{99CF64E9-AF55-4FDA-A583-A3D764D6C825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "008Log4Net", "008Log4Net\008Log4Net.csproj", "{11BB6869-52A2-4E41-B8B1-F35934591170}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{99CF64E9-AF55-4FDA-A583-A3D764D6C825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99CF64E9-AF55-4FDA-A583-A3D764D6C825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99CF64E9-AF55-4FDA-A583-A3D764D6C825}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11BB6869-52A2-4E41-B8B1-F35934591170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11BB6869-52A2-4E41-B8B1-F35934591170}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11BB6869-52A2-4E41-B8B1-F35934591170}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11BB6869-52A2-4E41-B8B1-F35934591170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
