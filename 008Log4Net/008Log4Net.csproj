@@ -94,6 +94,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <None Include="Web.config[将日志保存到数据库中]">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config[将日志保存到数据库中]">
+      <DependentUpon>Web.config[将日志保存到数据库中]</DependentUpon>
+    </None>
+    <None Include="Web.Release.config[将日志保存到数据库中]">
+      <DependentUpon>Web.config[将日志保存到数据库中]</DependentUpon>
+    </None>
     <None Include="Web.config[每一天放在一个文件夹，妹一分钟一个文件]">
       <SubType>Designer</SubType>
     </None>

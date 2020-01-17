@@ -30,9 +30,13 @@
 * 1.1 Html.BeginForm()等
 * 1.2 Html.validationMessage()和Html.validationSummary()
 
-6. 006特性路由、
-* 在RoutesConfig.cs中RegisterRoutes（）中routes.MapMVCAttributeRoutes()
+6. 006特性路由
+* 在RoutesConfig.cs中RegisterRoutes（RouteCollection routes）｛｝方法中添加       routes.MapMVCAttributeRoutes()
 
 7. 007传统路由
 * 路由规则，默认路由，路由顺序，路由约束
 * 选择传统路由还是特性路由
+
+8. 008Log4Net
+* NuGet:`Install-Package log4net -Version 2.0.8`
+* 在Web.config中配置
