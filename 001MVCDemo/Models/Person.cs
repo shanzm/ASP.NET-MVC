@@ -13,6 +13,7 @@ namespace MVCDemo.Models
         public string Email { get; set; }
         public int ClassId { get; set; }
         public int Id { get; set; }
+        public string Password { get; set; }
 
     }
 }

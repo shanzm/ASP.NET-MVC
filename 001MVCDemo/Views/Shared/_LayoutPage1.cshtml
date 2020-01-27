@@ -4,9 +4,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Login/Login.js"></script>
 </head>
 <body>
-    @RenderSection("Header")
+    @if (IsSectionDefined("Header"))
+    {
+        @RenderSection("Header")
+    }
+
     <p>welcome!</p>
     <div>
         @RenderBody()
@@ -19,11 +27,16 @@
         }
         else
         {
-             <text>这是默认显示的内容</text> 
+            <text>这是默认显示的内容</text>
         }
 
     </div>
     <p>goodbye!</p>
-    @RenderSection("Footer")
+    @if (IsSectionDefined("Footer"))
+    {
+        @RenderSection("Footer")
+    }
+   
 </body>
+
 </html>
