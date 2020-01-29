@@ -108,6 +108,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Login\Login2.js" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LayoutTestController.cs" />
+    <Compile Include="Controllers\LoginByAjaxWithJsonControlle.cs" />
     <Compile Include="Controllers\LoginByAjaxController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -123,6 +125,7 @@
     </Compile>
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\ReturnData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
@@ -139,6 +142,7 @@
     <Content Include="Views\LayoutTest\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\LoginByAjax\Login.cshtml" />
+    <Content Include="Views\LoginByAjaxWithJson\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
