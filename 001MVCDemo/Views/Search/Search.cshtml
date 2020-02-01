@@ -41,7 +41,7 @@
     <script>
         /// <reference path="jquery-1.10.2.min.js" />
         $(function () {
-            $("#txtTitle").blur(function () {
+            $("#txtTitle").keyup(function () {
                 var title = $.trim($("#txtTitle").val());
                 if (title == "") {
                     $("#con").hide();
@@ -51,7 +51,9 @@
                     $("#con").show();
                     $.post("Search", { "title": title }, function (data) {
                         //alert(data);//测试后端传来的数据
-                        var data = JSON.parse(data);
+                        //var data = JSON.parse(data);
+                        //var data = $.parseJSON(data);
+                        //alert(data);
                         var s = "";
                         //for (var i = 0; i < data.Data.length; i++) {
                         //    s += "<div>" + data.Data[i].Title + "</div>";

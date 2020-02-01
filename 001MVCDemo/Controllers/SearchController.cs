@@ -40,11 +40,13 @@ namespace MVCDemo.Controllers
 
             ReturnData<News> rm = new ReturnData<News>() { Data = listNews };
 
-            JavaScriptSerializer jss = new JavaScriptSerializer();
+            //JavaScriptSerializer jss = new JavaScriptSerializer();
+            //return Content(jss.Serialize(rm));
 
-            //return Json(rm,JsonRequestBehavior.AllowGet);
+            return Json(rm,JsonRequestBehavior.AllowGet);
+            //注意使用Json()函数，返回的是一个JavaScript中的Json对象
+            //所以在前端页面中就不需要再对该数据使用JSON.Parse()反序列化
 
-            return Content(jss.Serialize(rm));
         }
     }
 }
