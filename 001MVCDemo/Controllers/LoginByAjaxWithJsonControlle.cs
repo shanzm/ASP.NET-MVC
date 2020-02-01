@@ -20,12 +20,11 @@ namespace MVCDemo.Controllers
         [HttpPost]
         public ActionResult Login(string Name, string Pwd)
         {
-            if (Name == "admin" && Pwd == "123456")
+            if (Name == "admin")
             {
-                ViewData["Time"] = DateTime.Now.ToString();
                 ReturnData<Person> rd = new ReturnData<Person>()
                 {
-                    Message = "登录成功",
+                    Message = "用户名正确",
                     Success = true,
                     Redirect = "http://www.baidu.com",
                     Data = new List<Models.Person>()
@@ -34,13 +33,25 @@ namespace MVCDemo.Controllers
                         new Person() { Id = 2, Name = "shanzm2" }
                     }
                 };
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-                return Content(jss.Serialize(rd));
+                //JavaScriptSerializer jss = new JavaScriptSerializer();
+                //return Content(jss.Serialize(rd));
+                return Json(rd);
             }
             else
             {
                 ViewData["Time"] = DateTime.Now.ToString();
-                return Content("error");
+                ReturnData<Person> rd = new ReturnData<Person>()
+                {
+                    Message = "用户名错误",
+                    Success = true,
+                    Redirect = "http://www.baidu.com",
+                    Data = new List<Models.Person>()
+                    {
+                        new Person() { Id = 1, Name = "shanzm1" },
+                        new Person() { Id = 2, Name = "shanzm2" }
+                    }
+                };
+                return Json(rd);
             }
         }
 
