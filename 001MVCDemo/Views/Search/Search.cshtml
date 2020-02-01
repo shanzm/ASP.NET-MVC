@@ -1,0 +1,87 @@
+﻿@model System.Object
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: "微软雅黑";
+        }
+
+        #txtTitle {
+            width: 300px;
+            height: 34px;
+        }
+
+        #con {
+            width: 301px;
+            border: solid 1px #ccc;
+            border-top-width: 0px;
+            display: none;
+            font-size: 14px;
+        }
+
+            #con div {
+                margin-top: 5px;
+            }
+
+            #con .bg {
+                background-color: #ccc;
+            }
+    </style>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        /// <reference path="jquery-1.10.2.min.js" />
+        $(function () {
+            $("#txtTitle").blur(function () {
+                var title = $.trim($("#txtTitle").val());
+                if (title == "") {
+                    $("#con").hide();
+                }
+                else {
+
+                    $("#con").show();
+                    $.post("Search", { "title": title }, function (data) {
+                        //alert(data);//测试后端传来的数据
+                        var data = JSON.parse(data);
+                        var s = "";
+                        //for (var i = 0; i < data.Data.length; i++) {
+                        //    s += "<div>" + data.Data[i].Title + "</div>";
+                        //}
+                        $(data.Data).each(function (index) { s += "<div>" + data.Data[index].Title + "</div>" });
+                        //alert(s);//测试显示的数据s
+                        $("#con").html(s);
+                        $("#con div").hover(function () {
+                            $(this).addClass("bg");
+                        }, function () {
+                            $(this).removeClass("bg");
+                        });
+                        $("#con div").click(function () {
+                            $("#con").hide();
+                            $("#txtTitle").val($(this).text());
+                        });
+
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <form action="~/Search/Search" method="post">
+            <input type="text" id="txtTitle" />
+            <input type="submit" id="submit" />
+        </form>
+        <div id="con"></div>
+    </div>
+</body>
+</html>

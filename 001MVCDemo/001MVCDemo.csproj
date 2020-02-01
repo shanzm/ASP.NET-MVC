@@ -119,11 +119,13 @@
     <Compile Include="Controllers\LoginByAjaxWithJsonControlle.cs" />
     <Compile Include="Controllers\LoginByAjaxController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\ReturnData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +145,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\LoginByAjax\Login.cshtml" />
     <Content Include="Views\LoginByAjaxWithJson\Login.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
