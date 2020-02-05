@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
+        @Scripts.Render("~/bundles/modernizr")*@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 </head>
 <body>
@@ -30,6 +30,10 @@
         }
 
     </div>
+    <div>
+        @RenderSection("abc", false)
+    </div>
+
     <p>goodbye!</p>
     @if (IsSectionDefined("Footer"))
     {
