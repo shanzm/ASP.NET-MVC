@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestIBLL
 {
-    public interface IDogBll
+    public interface IAnimalBll
     {
         void Bark();
     }

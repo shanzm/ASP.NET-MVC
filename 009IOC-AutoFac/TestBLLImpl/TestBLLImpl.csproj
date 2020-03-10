@@ -43,6 +43,7 @@
     <Compile Include="DogBll.cs" />
     <Compile Include="UserBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CatBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestIBLL\TestIBLL.csproj">

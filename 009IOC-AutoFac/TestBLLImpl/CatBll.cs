@@ -7,11 +7,11 @@ using TestIBLL;
 
 namespace TestBLLImpl
 {
-    public class DogBll : IAnimalBll
+    public class CatBll : IAnimalBll
     {
         public void Bark()
         {
-            Console.WriteLine("汪汪汪！");
+            Console.WriteLine("喵喵喵！");
         }
     }
 }
