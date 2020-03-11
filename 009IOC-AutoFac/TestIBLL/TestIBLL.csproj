@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAnimalBll.cs" />
+    <Compile Include="IMasterBll.cs" />
     <Compile Include="IUserBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

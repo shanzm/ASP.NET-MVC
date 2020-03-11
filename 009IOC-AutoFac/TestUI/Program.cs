@@ -34,7 +34,9 @@ namespace TestUI
 
             //UseAutoFac3();
 
-            UseAutoFac4();
+            //UseAutoFac4();
+
+            UseAutoFac5();
             Console.ReadKey();
         }
 
@@ -83,6 +85,7 @@ namespace TestUI
 
         }
 
+        //把所有的接口实现类都注册
         private static void UseAutoFac3()
         {
             //从上面几个示例，你可以发现好像使用依赖反转，好像有点麻烦！
@@ -105,6 +108,7 @@ namespace TestUI
             Console.WriteLine(userBll.GetType());//调试时查看uerBll接口对象中的具体实现对象:TestBllImpl.UserBll
         }
 
+        //同一个接口多个实现类，同时注册
         private static void UseAutoFac4()
         {
             ContainerBuilder builder = new ContainerBuilder();
@@ -124,6 +128,20 @@ namespace TestUI
                 bll.Bark();
             }
 
+        }
+
+        private static void UseAutoFac5()
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+
+            Assembly asm = Assembly.Load(" TestBLLImpl");
+            //在这里通过.PropertiesAutowired()，给接口实现类中的接口属性也注册一个该类型的接口的实现类
+            builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
+            IContainer container = builder.Build();
+
+            IMasterBll masterBll = container.Resolve<IMasterBll>();
+
+            masterBll.Walk();
         }
     }
 }
