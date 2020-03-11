@@ -36,7 +36,9 @@ namespace TestUI
 
             //UseAutoFac4();
 
-            UseAutoFac5();
+            //UseAutoFac5();
+
+            UseAutoFac6();
             Console.ReadKey();
         }
 
@@ -130,6 +132,7 @@ namespace TestUI
 
         }
 
+        //接口实现类中的接口类型的属性
         private static void UseAutoFac5()
         {
             ContainerBuilder builder = new ContainerBuilder();
@@ -140,8 +143,33 @@ namespace TestUI
             IContainer container = builder.Build();
 
             IMasterBll masterBll = container.Resolve<IMasterBll>();
-
             masterBll.Walk();
         }
+
+        //在使用AutoFac的时候，  建议所有的实现类都写成无状态的
+        //无状态的就是实现类中只去实现接口，而不要添加一些属性和字段
+        //这样在注册接口的时候，所有的实现类的对象可以设置为单例模式
+        //即整个系统中实现类的对象只有一个，降低了内存的占用，而且不会存在数据修改形成的脏数据
+        private static void UseAutoFac6()
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+
+            Assembly asm = Assembly.Load(" TestBLLImpl");
+            //这里通过使用singleInstance()实现注册给接口的实现类的对象以单例模式
+            builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().SingleInstance();
+            IContainer container = builder.Build();
+
+            IUserBll userBll1 = container.Resolve<IUserBll>();
+            userBll1.Login("shanzm", "1111");
+
+            IUserBll userBll2 = container.Resolve<IUserBll>();
+            userBll2.Login("shanzm", "2222");
+
+            //对比你就会发现，其实userBll1和userBll2指向的是同一个对象
+            //因为是单例模式，所以在该程序中所有创建的IUserBll对象都是同一个。
+            //若是去掉.SingleInstance()则会打印为false，即默认的不是单例模式
+            Console.WriteLine(object.ReferenceEquals(userBll1, userBll2));//打印结果:true
+        }
+
     }
 }
