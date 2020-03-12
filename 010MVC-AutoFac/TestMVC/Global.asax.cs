@@ -22,8 +22,7 @@ namespace TestMVC
             ContainerBuilder builder = new ContainerBuilder();
             //using Autofac.Integration.Mvc;
 
-            //把当前程序集中的所有Controller都注册
-            //包括Controller类的接口类型的属性也注册
+            //把当前程序集中的所有Controllerr类中的接口类型的属性注册
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
             //获取所有相关类库的程序集并把所有的接口实现类注册给相应的接口
@@ -41,6 +40,7 @@ namespace TestMVC
                 .PropertiesAutowired();//接口实现类中接口类型的属性也注册
 
             IContainer container = builder.Build();
+            //注册系统级别的注入，即MVC中的所有Controller类都是由AutoFac帮我们创建对象
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             #endregion
 
