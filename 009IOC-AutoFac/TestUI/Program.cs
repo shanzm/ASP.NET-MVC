@@ -139,6 +139,7 @@ namespace TestUI
 
             Assembly asm = Assembly.Load(" TestBLLImpl");
             //在这里通过.PropertiesAutowired()，给接口实现类中的接口属性也注册一个该类型的接口的实现类
+            //即属性自动装配
             builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
             IContainer container = builder.Build();
 
