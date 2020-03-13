@@ -42,9 +42,10 @@ namespace TestUI
             Console.ReadKey();
         }
 
+        //首先不使用AutoFac
         private static void InterfaceOriented()
         {
-            //首先不使用AutoFac
+
             IUserBll userbll = new UserBll();//其实这里就是面向接口编程了，我们定义个一个接口类型的变量，赋值一个实现该接口的类的实例（即里氏原则）
             userbll.Login("shanzm", "123456");
 
@@ -57,9 +58,9 @@ namespace TestUI
         private static void UseAutoFac()
         {
             ContainerBuilder builder = new ContainerBuilder();
-            //把UserBll注册为IUserBll的实现类，即把实现了接口的类注册给他的接口！
+            //把UserBll类型对象注册给IUserBll接口，即把实现了接口的类的对象注册给他的接口！
             builder.RegisterType<UserBll>().As<IUserBll>();
-            builder.RegisterType<DogBll>().As<IAnimalBll>();//把DogBll注册为IAnimalBll的实现类，注意在TestBllImpl项目中有多个IAnimalBll的实现类
+            builder.RegisterType<DogBll>().As<IAnimalBll>();//把DogBll对象注册给IAnimalBll接口，注意在TestBllImpl项目中有多个IAnimalBll的实现类
 
             IContainer container = builder.Build();
 
