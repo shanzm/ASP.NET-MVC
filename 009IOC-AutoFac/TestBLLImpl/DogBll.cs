@@ -9,7 +9,7 @@ namespace TestBLLImpl
 {
     public class DogBll : IAnimalBll
     {
-        public void Bark()
+        public void Cry()
         {
             Console.WriteLine("汪汪汪！");
         }

@@ -30,7 +30,7 @@ namespace TestUI
 
             //UseAutoFac();
 
-            //UseAutoFac2();
+            UseAutoFac2();
 
             //UseAutoFac3();
 
@@ -38,7 +38,7 @@ namespace TestUI
 
             //UseAutoFac5();
 
-            UseAutoFac6();
+            //UseAutoFac6();
             Console.ReadKey();
         }
 
@@ -50,24 +50,37 @@ namespace TestUI
             userbll.Login("shanzm", "123456");
 
             IAnimalBll dogBll = new DogBll();
-            dogBll.Bark();
+            dogBll.Cry();
 
             Console.ReadKey();
         }
 
         private static void UseAutoFac()
         {
+            //创建容器构造者，用于注册组件和服务（组件：接口实现类，服务：接口）
             ContainerBuilder builder = new ContainerBuilder();
-            //把UserBll类型对象注册给IUserBll接口，即把实现了接口的类的对象注册给他的接口！
+            //注册组件UserBll类，并把服务IUserBll接口暴露给该组件
+            //把服务（IUserBll）暴露给组件（UserBll）
             builder.RegisterType<UserBll>().As<IUserBll>();
-            builder.RegisterType<DogBll>().As<IAnimalBll>();//把DogBll对象注册给IAnimalBll接口，注意在TestBllImpl项目中有多个IAnimalBll的实现类
-
+            // builder.RegisterType<DogBll>().As<IAnimalBll>();//把DogBll类注册给IAnimalBll接口，注意在TestBllImpl项目中有多个IAnimalBll的实现类
+            builder.RegisterType<DogBll>().Named<IAnimalBll>("Dog");
+            builder.RegisterType<CatBll>().Named<IAnimalBll>("Cat");
+            //创建容器
             IContainer container = builder.Build();
+            //使用容器解析服务（不推荐这样，可能造成内存的泄露）
+            //IUserBll userBll = container.Resolve<IUserBll>();
+            //IAnimalBll dogBll = container.Resolve<IAnimalBll>();
+            //使用容器的生命周期解析服务（这样可以确保服务实例被妥善地释放和垃圾回收）
+            using (ILifetimeScope scope = container.BeginLifetimeScope())
+            {
+                IUserBll userBll = scope.Resolve<IUserBll>();
+                IAnimalBll dogBll = scope.ResolveNamed<IAnimalBll>("Dog");
+                IAnimalBll catBll = scope.ResolveNamed<IAnimalBll>("Cat");
+                userBll.Login("shanzm", "123456");
+                dogBll.Cry();
+                catBll.Cry();
+            }
 
-            IUserBll userBll = container.Resolve<IUserBll>();
-            IAnimalBll dogBll = container.Resolve<IAnimalBll>();
-            userBll.Login("shanzm", "123456");
-            dogBll.Bark();
         }
 
         private static void UseAutoFac2()
@@ -80,10 +93,14 @@ namespace TestUI
             //换言之，只要是UserBll实现的接口，我们都可以该他一个UserBll对象
 
             builder.RegisterType<UserBll>().AsImplementedInterfaces();
+            //builder.RegisterType<MasterBll>().AsImplementedInterfaces();
+            builder.RegisterType<MasterBll>().As<IUserBll>().As<IMasterBll>();
             IContainer container = builder.Build();
 
-            IUserBll userBll = container.Resolve<IUserBll>();//但是要注意的是若是TestBll项目中对IUserBll接口有多个实现类，则这里给接口注册的实现类具体是哪一个是不确定的
-
+            IUserBll  userBll = container.Resolve<IUserBll>();
+            
+           
+           
             userBll.Login("shanzm", "123456");
 
         }
@@ -104,7 +121,7 @@ namespace TestUI
             //然后直接调用接口对象就可以了，而且你都不用明白到底是哪个一个类实现该接口
             //从而实现了解耦
 
-
+    
             IUserBll userBll = container.Resolve<IUserBll>();
             userBll.Login("shanzm", "123456");
 
@@ -127,10 +144,13 @@ namespace TestUI
             IEnumerable<IAnimalBll> animalBlls = container.Resolve<IEnumerable<IAnimalBll>>();
             foreach (var bll in animalBlls)
             {
-                Console.WriteLine(bll.GetType());
-                bll.Bark();
-            }
 
+                Console.WriteLine(bll.GetType());
+                bll.Cry();
+            }
+            //挑选指定的某个实现类
+            IAnimalBll dogBll = animalBlls.Where(t => t.GetType() == typeof(DogBll)).First();
+            dogBll.Cry();
         }
 
         //接口实现类中的接口类型的属性
@@ -142,6 +162,7 @@ namespace TestUI
             //在这里通过.PropertiesAutowired()，给接口实现类中的接口属性也注册一个该类型的接口的实现类
             //即属性自动装配
             builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
+            //---------------builder.RegisterType<MasterBll>().WithProperty("dogBll", new DogBll());
             IContainer container = builder.Build();
 
             IMasterBll masterBll = container.Resolve<IMasterBll>();

@@ -8,6 +8,6 @@ namespace TestIBLL
 {
     public interface IAnimalBll
     {
-        void Bark();
+        void Cry();
     }
 }
