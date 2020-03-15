@@ -17,12 +17,12 @@ namespace TestBLLImpl
     {
         public void AddNew(string userName, string pwd)
         {
-            Console.WriteLine($"新增了一个用户：{userName}");
+            Console.WriteLine($"新增了一个普通用户：{userName}");
         }
 
         public bool Login(string userName, string pwd)
         {
-            Console.WriteLine($"登录用户是：{userName}");
+            Console.WriteLine($"登录用户是普通用户：{userName}");
             return true;
         }
     }

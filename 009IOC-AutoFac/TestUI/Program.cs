@@ -30,13 +30,13 @@ namespace TestUI
 
             //UseAutoFac();
 
-            UseAutoFac2();
+            //UseAutoFac2();
 
             //UseAutoFac3();
 
             //UseAutoFac4();
 
-            //UseAutoFac5();
+            UseAutoFac5();
 
             //UseAutoFac6();
             Console.ReadKey();
@@ -83,25 +83,25 @@ namespace TestUI
 
         }
 
+        //一个实现类实现了多个接口
         private static void UseAutoFac2()
         {
             ContainerBuilder builder = new ContainerBuilder();
-            //把UserBll注册为IUserBll的实现类，即
-            //builder.RegisterType<UserBll>().As<IUserBll>();
 
-            //有可能UersBll实现了多个接口，我们可以把该类注册给他所有实现的接口
-            //换言之，只要是UserBll实现的接口，我们都可以该他一个UserBll对象
+            //MasterBll实现了多个接口，我们可以把该类注册给他所有实现的接口
+            //换言之，只要是MasterBll实现的接口，我们都可以该他一个MasterBll类型的对象
+            //但是注意，这个MasterBll对象只包含当前接口的方法
 
-            builder.RegisterType<UserBll>().AsImplementedInterfaces();
-            //builder.RegisterType<MasterBll>().AsImplementedInterfaces();
-            builder.RegisterType<MasterBll>().As<IUserBll>().As<IMasterBll>();
+
+            builder.RegisterType<MasterBll>().AsImplementedInterfaces();//把MasterBll类注册给所有他实现的接口
+            //即一个组件暴露了多个服务，这里就等价于：
+            //builder.RegisterType<MasterBll>().As<IUserBll>().As<IMasterBll>();
+
             IContainer container = builder.Build();
 
-            IUserBll  userBll = container.Resolve<IUserBll>();
-            
-           
-           
-            userBll.Login("shanzm", "123456");
+            IUserBll userBll = container.Resolve<IUserBll>();//其实这里的userBll是MasterBll类型的对象,但是只具有IUserBll接口中的方法
+            userBll.Login("shanzm", "11111");//打印：登录用户是Master:shanzm
+            Console.WriteLine(userBll.GetType());//打印：TestBLLImpl.MasterBll
 
         }
 
@@ -121,7 +121,7 @@ namespace TestUI
             //然后直接调用接口对象就可以了，而且你都不用明白到底是哪个一个类实现该接口
             //从而实现了解耦
 
-    
+
             IUserBll userBll = container.Resolve<IUserBll>();
             userBll.Login("shanzm", "123456");
 
@@ -138,13 +138,14 @@ namespace TestUI
             IContainer container = builder.Build();
 
             //IAnimalBll animalBll = container.Resolve<IAnimalBll>();
-            //animalBll.Bark ();//因为在TestBLLImpl项目中有多个IAnimalBll接口的的实现类，所以这里的animalBll中具体是哪个类型的对象你也不知道
+            //animalBll.Bark ();
+            //因为在TestBLLImpl项目中有多个IAnimalBll接口的的实现类，所以这里的animalBll中具体是哪个类型的对象你也不知道
+            //如果不止一个组件暴露了相同的服务, Autofac将使用最后注册的组件作为服务的提供方
 
             //将所有实现了IAnimalBll接口的对象都注册在一个集合中，遍历该集合分别使用每个实现了IAnimalBll接口的对象
             IEnumerable<IAnimalBll> animalBlls = container.Resolve<IEnumerable<IAnimalBll>>();
             foreach (var bll in animalBlls)
             {
-
                 Console.WriteLine(bll.GetType());
                 bll.Cry();
             }
@@ -153,16 +154,29 @@ namespace TestUI
             dogBll.Cry();
         }
 
+
+
         //接口实现类中的接口类型的属性
         private static void UseAutoFac5()
         {
             ContainerBuilder builder = new ContainerBuilder();
 
-            Assembly asm = Assembly.Load(" TestBLLImpl");
+            Assembly asm = Assembly.Load("TestBLLImpl");
             //在这里通过.PropertiesAutowired()，给接口实现类中的接口属性也注册一个该类型的接口的实现类
             //即属性自动装配
-            builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
-            //---------------builder.RegisterType<MasterBll>().WithProperty("dogBll", new DogBll());
+
+            //法1:使用PropertiesAutowired()
+            //builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
+            //builder.RegisterType<DogBll>().As<IAnimalBll>();
+            //这样在给程序集中所有类注册的时候，自动为类中接口类型的属性也注册，但是有一个问题
+            //若是该属性的接口类型有多个实现类，则使用PropertiesAutowired()为我们注册的实现类，可能不是我想要的
+            //比如这里，我希望MasterBll类中的IAnimalBll类型的属性，注册一个DogBll类型的对象，但是实际是自动注册的是一个CatBll类型的对象
+            //所以我们要显示的把Dogbll实现类注册给IAnimalBll接口
+
+            //法2：使用WithProperty()
+            //针对具体的实现类中具体的某个接口类型的属性进行注册
+            builder.RegisterType<MasterBll>().As<IMasterBll>().WithProperty("dogBll",new DogBll());
+
             IContainer container = builder.Build();
 
             IMasterBll masterBll = container.Resolve<IMasterBll>();
