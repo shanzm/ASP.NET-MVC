@@ -36,9 +36,12 @@ namespace TestUI
 
             //UseAutoFac4();
 
-            UseAutoFac5();
+            //UseAutoFac5();
 
             //UseAutoFac6();
+
+            UseAutoFac7();
+
             Console.ReadKey();
         }
 
@@ -175,7 +178,7 @@ namespace TestUI
 
             //法2：使用WithProperty()
             //针对具体的实现类中具体的某个接口类型的属性进行注册
-            builder.RegisterType<MasterBll>().As<IMasterBll>().WithProperty("dogBll",new DogBll());
+            builder.RegisterType<MasterBll>().As<IMasterBll>().WithProperty("dogBll", new DogBll());
 
             IContainer container = builder.Build();
 
@@ -192,21 +195,56 @@ namespace TestUI
             ContainerBuilder builder = new ContainerBuilder();
 
             Assembly asm = Assembly.Load(" TestBLLImpl");
-            //这里通过使用singleInstance()实现注册给接口的实现类的对象以单例模式
+            //这里通过使用SingleInstance()实现注册给接口的实现类的对象以单例模式
             builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().SingleInstance();
             IContainer container = builder.Build();
 
-            IUserBll userBll1 = container.Resolve<IUserBll>();
-            userBll1.Login("shanzm", "1111");
+            //IUserBll userBll1 = container.Resolve<IUserBll>();
+            //userBll1.Login("shanzm", "1111");
 
-            IUserBll userBll2 = container.Resolve<IUserBll>();
-            userBll2.Login("shanzm", "2222");
+            //IUserBll userBll2 = container.Resolve<IUserBll>();
+            //userBll2.Login("shanzm", "2222");
 
-            //对比你就会发现，其实userBll1和userBll2指向的是同一个对象
-            //因为是单例模式，所以在该程序中所有创建的IUserBll对象都是同一个。
-            //若是去掉.SingleInstance()则会打印为false，即默认的不是单例模式
-            Console.WriteLine(object.ReferenceEquals(userBll1, userBll2));//打印结果:true
+            using (var scope = container.BeginLifetimeScope())
+            {
+                IUserBll userBll1 = scope.Resolve<IUserBll>();
+                userBll1.Login("shanzm", "1111");
+
+                IUserBll userBll2 = scope.Resolve<IUserBll>();
+                userBll2.Login("shanzm", "2222");
+
+                //对比你就会发现，其实userBll1和userBll2指向的是同一个对象
+                //因为是单例模式，所以在该程序中所有创建的IUserBll对象都是同一个。
+                //若是去掉.SingleInstance()则会打印为false，即默认的不是单例模式
+                Console.WriteLine(ReferenceEquals(userBll1, userBll2));//打印结果:true
+            }
+
+
         }
 
+        private static void UseAutoFac7()
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+
+            Assembly asm = Assembly.Load(" TestBLLImpl");
+            //这里通过使用SingleInstance()实现注册给接口的实现类的对象以单例模式
+            builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().SingleInstance();
+            IContainer container = builder.Build();
+
+            using (var scope1 = container.BeginLifetimeScope())
+            {
+                IUserBll userBll1 = scope1.Resolve<IUserBll>();
+                userBll1.Login("shanzm", "1111");
+
+                using (var scope2 = container.BeginLifetimeScope())
+                {
+                    IUserBll userBll2 = scope2.Resolve<IUserBll>();
+                    userBll2.Login("shanzm", "2222");
+                    Console.WriteLine(ReferenceEquals(userBll1, userBll2));
+                    //因为是单一实例，所以就是在不同的生命周期中，也是同一个实例，打印结果:true
+                }
+            }
+
+        }
     }
 }
