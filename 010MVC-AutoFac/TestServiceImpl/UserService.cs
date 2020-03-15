@@ -13,14 +13,13 @@ namespace TestServiceImpl
 
         public bool CheckLogin(string userName, string pwd)
         {
-            string result = newsService.AddNews("titlelala", "lalabody");
-            return (result == "titlelala");//为了验证newsService属性被注册，所以这里其实是一定返回true;
+            return true;
         }
 
-        public bool CheckUserNameExists(string userName)
+        public string UserAction(string userName)
         {
-            return false;
+            string result = newsService.AddNews("2020年3月16日-新冠病毒", "中国境内的新冠病毒被有效遏制");
+            return userName+"  添加新闻  ："+result;
         }
-
     }
 }

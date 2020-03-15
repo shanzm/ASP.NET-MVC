@@ -9,6 +9,6 @@ namespace TestIService
     public interface IUserService
     {
         bool CheckLogin(string userName, string pwd);
-        bool CheckUserNameExists(string userName);
+        string UserAction(string userName);
     }
 }

@@ -11,7 +11,7 @@ namespace TestServiceImpl
     {
         public string AddNews(string title, string body)
         {
-            return (title);
+            return ($"Title：{title},Content：{body}");
         }
     }
 }
