@@ -40,3 +40,16 @@
 8. 008Log4Net
 * NuGet:`Install-Package log4net -Version 2.0.8`
 * 在Web.config中配置
+
+9. 009IOC-AutoFac
+* NuGet:`Install-Package Autofac`
+* `容器`，`组件`，`服务`，`注册`，`解析`等概念
+* 注册程序集中所有的实现类
+
+10. 010MVC-AutoFac
+* NuGet:`Install-Package AutoFac.Mvc5`
+* 在Global.asax.cs文件中配置AutoFac
+
+11. 011手写IOC-MyIOC
+* 反射程序集获取对象类型
+* 实现属性注入
