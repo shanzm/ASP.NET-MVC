@@ -22,7 +22,7 @@ namespace TestMVC
             ContainerBuilder builder = new ContainerBuilder();
             //using Autofac.Integration.Mvc;
 
-            //把当前程序集中的所有Controllerr类中的接口类型的属性注册
+            //把当前程序集中的所有Controllerr都注册到容器
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
             //获取所有相关类库的程序集并把所有的接口实现类注册给相应的接口
