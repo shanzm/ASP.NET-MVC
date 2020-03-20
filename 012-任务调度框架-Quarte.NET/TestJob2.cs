@@ -19,38 +19,60 @@ namespace _012_任务调度框架_Quartz.NET
             string description = dataMap.GetString("description");
             string tels = dataMap.GetString("tels");
 
-            //执行定时任务 发送短信
-            await Task.Run(() => Console.WriteLine("执行任务了……"));
+            //执行定时任务:模拟发送短信
+            await Task.Run(() => Console.WriteLine($"发短信：【{tag}】,{title}：{content },{description},电话：{tels}。"));
 
-           await context.Scheduler.Shutdown();
+            //await context.Scheduler.Shutdown();//表示完成当前的定时任务，以后周期中的定时任务
+
+            //记入日志
+            Console.WriteLine("执行了一次定时任务，记入日志");
         }
 
-        //定义任务
-        public static async void SetTask(string tag, string starttime, string title, string content, string description, string tels)
+        //封装一个定时任务
+        public static async void SendMessage(string starttime, string cronStr, string tag, string title, string content, string description, string tels)
         {
             try
             {
-                DateTime time = DateTime.Parse(starttime);
-                //下面用到的执行时间要使用Cron表达式(如:"/5 * * ? * *"),下面我会介绍一下
-                string cronstr = "/5 * * ? * *";
+                //创建调度器
                 IScheduler scheduler = await new StdSchedulerFactory().GetScheduler();
 
-                JobDataMap jobData = new JobDataMap();
-                jobData.Add("tag", tag);
-                jobData.Add("title", title);
-                jobData.Add("content", content);
-                jobData.Add("description", description);
-                jobData.Add("tels", tels);
 
+                //为任务准备参数
+                DateTime time = DateTime.Parse(starttime);
+                //JobDataMap jobData = new JobDataMap();
+                //jobData.Add("tag", tag);
+                //jobData.Add("title", title);
+                //jobData.Add("content", content);
+                //jobData.Add("description", description);
+                //jobData.Add("tels", tels);
+
+                JobDataMap jobData = new JobDataMap()
+                {
+                    new KeyValuePair<string, object>("tag", tag),
+                    new KeyValuePair<string, object>("title", title),
+                    new KeyValuePair<string, object>("content", content),
+                    new KeyValuePair<string, object>("description", description),
+                    new KeyValuePair<string, object>("tels", tels),
+                };
+
+                //创建任务：
                 //用时间做组名：DateTime.Now.ToLongDateString()
-                IJobDetail job = JobBuilder.Create<TestJob2>().WithIdentity("Testjob1", "group1").SetJobData(jobData).Build();
-                ITrigger trigger = TriggerBuilder.Create()
-                                            .WithIdentity("triger1", "group1")
-                                            .StartNow()                        //现在开始
-                                            .WithCronSchedule(cronstr)
-                                            .Build();
+                IJobDetail job = JobBuilder.Create<TestJob2>()
+                                           .WithIdentity("Testjob1", "group1")
+                                           .SetJobData(jobData)
+                                           .Build();
 
-                await scheduler.ScheduleJob(job, trigger);//把作业，触发器加入调度器。
+                //创建触发器
+                ITrigger trigger = TriggerBuilder.Create()
+                                                 .WithIdentity("triger1", "group1")
+                                                 .StartAt(time)//触发器开始时间//.StartNow()现在开始
+                                                 .WithCronSchedule(cronStr)
+                                                 .Build();
+
+                //将任务和触发器添加到调度器中
+                await scheduler.ScheduleJob(job, trigger);
+                await scheduler.Start();
+                //throw new Exception("error!");
             }
             catch (Exception ex)
             {
