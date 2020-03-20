@@ -28,7 +28,7 @@ namespace MyIOC
             //student.Teacher = teacher;//IOCFactory实现了属性的注入
 
 
-            //Undone：没有实现的功能
+            //Undone：没有实现的功能:生命周期和循环依赖
             //1.实例生命周期的问题，实例作用域的问题
             //2.循环依赖的问他：Student类中有Teacher属性，若是Teacher类中有Student类属性，则会因为递归实现属性的注入而造成内存移除
 
