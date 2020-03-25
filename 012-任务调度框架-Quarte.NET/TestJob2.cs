@@ -12,20 +12,28 @@ namespace _012_任务调度框架_Quartz.NET
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            JobDataMap dataMap = context.MergedJobDataMap;
-            string tag = dataMap.GetString("tag");
-            string title = dataMap.GetString("title");
-            string content = dataMap.GetString("content");
-            string description = dataMap.GetString("description");
-            string tels = dataMap.GetString("tels");
+            try
+            {
+                JobDataMap dataMap = context.MergedJobDataMap;
+                string tag = dataMap.GetString("tag");
+                string title = dataMap.GetString("title");
+                string content = dataMap.GetString("content");
+                string description = dataMap.GetString("description");
+                string tels = dataMap.GetString("tels");
 
-            //执行定时任务:模拟发送短信
-            await Task.Run(() => Console.WriteLine($"发短信：【{tag}】,{title}：{content },{description},电话：{tels}。"));
+                //执行定时任务:模拟发送短信
+                await Task.Run(() => Console.WriteLine($"发短信：【{tag}】,{title}：{content },{description},电话：{tels}。"));
 
-            //await context.Scheduler.Shutdown();//表示完成当前的定时任务，以后周期中的定时任务
+                //await context.Scheduler.Shutdown();//表示完成当前的定时任务，关闭调度器
 
-            //记入日志
-            Console.WriteLine("执行了一次定时任务，记入日志");
+                //记入日志
+                Console.WriteLine("执行了一次定时任务，记入日志");
+            }
+            catch (Exception ex)
+            {
+                //记入日志Log.Error()
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //封装一个定时任务
