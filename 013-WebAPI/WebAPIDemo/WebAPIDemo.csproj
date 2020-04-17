@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{543F56D8-2EED-456F-80A2-3F5DFBBDC1C1}</ProjectGuid>
+    <ProjectGuid>{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -118,7 +118,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62964</DevelopmentServerPort>
+          <DevelopmentServerPort>63893</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:62814/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
