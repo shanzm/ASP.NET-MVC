@@ -24,6 +24,18 @@ namespace Dal
             }
         }
 
+        public IEnumerable<PersonDto> GetPersonAll()
+        {
+            using (MyDbContext cxt = new MyDbContext())
+            {
+                List<Person> personList = cxt.persons.ToList();
+                foreach (Person p in personList)
+                {
+                    yield return new PersonDto() { Id = p.Id, Name = p.Name, Age = p.Age, CreateDateTime = p.CreateDateTime };
+                }
+            }
+        }
+
         public int AddPerson(Person p)
         {
             using (MyDbContext cxt = new MyDbContext())

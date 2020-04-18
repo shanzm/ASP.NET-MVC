@@ -20,6 +20,11 @@ namespace Bll
             return personDal.GetPersonById(id);
         }
 
+        public IEnumerable<PersonDto> GetPersonAll()
+        {
+            return personDal.GetPersonAll();
+        }
+
         public bool AddPerson(PersonDto pDto)
         {
             Person p = new Person() { Id = pDto.Id, Name = pDto.Name, Age = pDto.Age, CreateDateTime = DateTime.Now };
