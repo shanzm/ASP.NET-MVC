@@ -14,7 +14,7 @@ namespace MVCDemo.Controllers
         public ActionResult Index(IndexModel model)//Action
         {
             model.Result = model.Num1 + model.Num2;
-            ViewData["name"] = "shanzm1";
+            ViewData["name"] = "sahnzm-testViewData";
             //ViewBag.name = "shanzm2";
 
             return View(model);

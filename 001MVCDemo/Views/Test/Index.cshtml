@@ -9,16 +9,18 @@
 </head>
 <body>
 
-    @{string a = "shanzm"; }
-    @a
-    @a.Length
+    @{string a = "shanzm"; }</br>
+    @a</br>
+    @a.Length</br>
     @foreach (char item in a)
     {
-        @item
+       @item
     }
 
-    @ViewData["name"]
-    @ViewBag.name
+
+    <span>ViewData中name索引的值 @ViewData["name"].ToString()</span></br>
+    <span>ViewBag中name索引的值  @ViewBag.name</span></br>
+   
     <div>
         <form action="~/Test/Index" method="post">
             <input type="text" name="Num1" value="@Model.Num1" />+
