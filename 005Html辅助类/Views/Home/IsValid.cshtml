@@ -12,7 +12,7 @@
     <style>
         /*Html.ValidationMessage产生的错误信息所在的元素的的样式*/
         .field-validation-error {
-            color: yellow;
+            color: red;
             font-size: larger;
         }
     </style>
@@ -20,20 +20,27 @@
 <body>
     <div>
 
-        @*Html.ValidationSummary()用来检验我们提交的数据是否符合在Person类中对属性的约束
-            Html.ValidationSummary()会将不符合约束的原因显示出来，
-            我们可以使用input元素的name属性作为其参数，单独显示特定的input元素的错误原因
-            运行之后我们可以看一下网页的源代码，
-            就可以发现Html.ValidationMessage产生的错误信息所在的元素的class属性值为：field-validation-error ，
-            我就可以以此来设置样式
-        *@
-        @using (Html.BeginForm("IsValid", "Home"))
-        {
+        <!--Html.ValidationSummary()用来检验我们提交的数据是否符合在Person类中对属性的约束
+             Html.ValidationSummary()会将不符合约束的原因显示出来，
+             我们可以使用input元素的name属性作为其参数，单独显示特定的input元素的错误原因
+             运行之后我们可以看一下网页的源代码，
+             就可以发现Html.ValidationMessage产生的错误信息所在的元素的class属性值为：field-validation-error ，
+             我就可以以此来设置样式
+         -->
+        @*@using (Html.BeginForm("IsValid", "Home"))
+            {
             <span>用户名：</span>@Html.TextBox("UserName") @Html.ValidationMessage("UserName")<br />
-            <span>密码：</span>@Html.Password("Password")@Html.ValidationMessage("Password")<br />
+                <span>密码：</span>@Html.Password("Password")@Html.ValidationMessage("Password")<<<br />
+                <input type="submit" value="提交" />
+                    @Html.ValidationSummary()
+        }*@
+
+
+        <form action="~/Home/IsValid" method="post">
+            用户名： <input type="text" name="UserName" value="" />@Html.ValidationMessage("UserName")<br />
+            密码：<input type="password" name="Password" value="" />@Html.ValidationMessage("Password")<br />
             <input type="submit" value="提交" />
-            @Html.ValidationSummary()
-        }
+        </form>
     </div>
 </body>
 </html>
