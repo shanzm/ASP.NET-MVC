@@ -1,5 +1,5 @@
 ﻿@model  MVCDemo.Models.IndexModel
-  
+
 <!DOCTYPE html>
 
 <html>
@@ -14,14 +14,17 @@
     @a.Length</br>
     @foreach (char item in a)
     {
-       @item
+        @item
     }
 
 
     <span>ViewData中name索引的值 @ViewData["name"].ToString()</span></br>
     <span>ViewBag中name索引的值  @ViewBag.name</span></br>
-   
+
     <div>
+        <!--注意：表单的而input name属性值与后台action参数model的属性是一一对应的
+            这是由于MVC的model binder决定的，当然你可以修改model binder，但是这是没有必要的
+        你可以在后台直接将参数定义为特定的Model类，也可以直接使用input的name属性值来接收-->
         <form action="~/Test/Index" method="post">
             <input type="text" name="Num1" value="@Model.Num1" />+
             <input type="text" name="Num2" value="@Model.Num2" />
@@ -30,6 +33,6 @@
         </form>
     </div>
     <hr>
-    
+
 </body>
 </html>

@@ -24,10 +24,13 @@
             姓名：<input type="text" name="Name" id="TxtName" /><br>
             年龄：<input type="text" name="Age" id="TxtAge" /><br>
             班级：<input type="text" name="ClassId" id="TxtClassId" /><br>
-            邮箱：<input type="text" name="Email" id="TxtEmail"/><br>
+            邮箱：<input type="text" name="Email" id="TxtEmail" /><br>
             <input type="submit" name="BtnSubmit" value="AddNew" /><!--提交按钮-->
             <input type="submit" name="BtnSubmit" value="Cancel" /><!--取消按钮-->
             <input type="button" name="BtnReset" value="Reset" onclick="ResetForm();" /><!--清空按钮-->
+            <!--注意：input的name属性就是后台action的参数名（即Model的属性名），value属性就是参数值-->
+            <!-- 注意这里的取消按钮和提交按钮同名，所以在后台接收数据后判断是提交还是取消
+             其实此功能还是许多方法，见：https://www.cnblogs.com/powertoolsteam/p/MVC_three.html  实验11-->
         </form>
     </div>
 </body>

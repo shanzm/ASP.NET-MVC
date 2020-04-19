@@ -56,11 +56,11 @@ namespace DropDownList1.Controllers
             };
             switch (BtnSubmit)
             {
-                case "AddNew":
+                case "AddNew"://保存新用户
                     SqlHelper.ExecuteNonquery("insert into T_Person (Name,Age,Email,ClassId) values(@Name,@Age,@Email,@ClassId);", CommandType.Text, param);
                     break;
 
-                case "Cancel":
+                case "Cancel"://取消提交
                     break;
             }
             return Redirect("~/Person/List");
