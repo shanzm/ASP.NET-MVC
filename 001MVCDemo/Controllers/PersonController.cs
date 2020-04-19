@@ -45,18 +45,28 @@ namespace DropDownList1.Controllers
         //}
 
         #endregion 
-        public ActionResult Add(Person model)
+        public ActionResult Add(Person model, string BtnSubmit)
         {
             SqlParameter[] param =
-            {
+              {
                new  SqlParameter ("@Name",model.Name ),
                new SqlParameter ("@Age" ,model.Age),
                new SqlParameter ("@Email",model.Email),
                new SqlParameter ("@ClassId",model.ClassId )
             };
-            SqlHelper.ExecuteNonquery("insert into T_Person (Name,Age,Email,ClassId) values(@Name,@Age,@Email,@ClassId);", CommandType.Text, param);
+            switch (BtnSubmit)
+            {
+                case "AddNew":
+                    SqlHelper.ExecuteNonquery("insert into T_Person (Name,Age,Email,ClassId) values(@Name,@Age,@Email,@ClassId);", CommandType.Text, param);
+                    break;
 
+                case "Cancel":
+                    break;
+            }
             return Redirect("~/Person/List");
+
+
+
         }
 
         [HttpGet]
@@ -65,7 +75,7 @@ namespace DropDownList1.Controllers
             SqlParameter param = new SqlParameter("@Id", id);
             DataTable dt = SqlHelper.GetDataTable("select * from T_Person where Id=@Id", CommandType.Text, param);
             Person p = new Person();
-            p.Name = Convert.ToString (dt.Rows[0]["Name"]);
+            p.Name = Convert.ToString(dt.Rows[0]["Name"]);
             p.Age = Convert.ToInt32(dt.Rows[0]["Age"]);
             p.Email = dt.Rows[0]["Email"].ToString();
             p.ClassId = Convert.ToInt32(dt.Rows[0]["ClassId"]);
@@ -95,7 +105,7 @@ namespace DropDownList1.Controllers
         public ActionResult Delete(long Id)
         {
             SqlParameter param = new SqlParameter("Id", Id);
-            SqlHelper.ExecuteNonquery("delete from T_Person where Id=@Id",CommandType.Text,param );
+            SqlHelper.ExecuteNonquery("delete from T_Person where Id=@Id", CommandType.Text, param);
 
             return Redirect("~/Person/List");
 

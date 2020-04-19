@@ -7,16 +7,27 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
+    <script type="text/javascript">
+        function ResetForm() {
+            document.getElementById('TxtName').value = "";
+            document.getElementById('TxtAge').value = "";
+            document.getElementById('TxtClassId').value = "";
+            document.getElementById("TxtEmail").value = "";
+        }
+    </script>
 </head>
 <body>
-   
+
     <div>
-        <form action="~/Person/Add" method="post">@*注意这里的表单对应的是[HttpPost]特性的Add()*@
-            姓名：<input type="text" name="Name" /><br>
-            年龄：<input type="text" name="Age" /><br>
-            班级：<input type="text" name="ClassId" /><br>
-            邮箱：<input type="text" name="Email" /><br>  
-            <input type="submit" value="添加" />
+        <form action="~/Person/Add" method="post">
+            @*注意这里的表单对应的是[HttpPost]特性的Add()*@
+            姓名：<input type="text" name="Name" id="TxtName" /><br>
+            年龄：<input type="text" name="Age" id="TxtAge" /><br>
+            班级：<input type="text" name="ClassId" id="TxtClassId" /><br>
+            邮箱：<input type="text" name="Email" id="TxtEmail"/><br>
+            <input type="submit" name="BtnSubmit" value="AddNew" /><!--提交按钮-->
+            <input type="submit" name="BtnSubmit" value="Cancel" /><!--取消按钮-->
+            <input type="button" name="BtnReset" value="Reset" onclick="ResetForm();" /><!--清空按钮-->
         </form>
     </div>
 </body>
