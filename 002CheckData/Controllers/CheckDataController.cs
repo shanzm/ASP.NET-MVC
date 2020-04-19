@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text;
 using System.Collections;
-using _003DropDownList.Models;
+using _002CheckData.Models;
 
-namespace _003DropDownList.Controllers
+namespace _002CheckData.Controllers
 {
     public class CheckDataController : Controller
     {

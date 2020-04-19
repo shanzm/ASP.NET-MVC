@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        .field-validation-error {
+            color: red;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/Login/Login" method="post">
+            用户名:<input type="text" name="Name" value="" />@Html.ValidationMessage("Name")<br />
+            密码:<input type="password" name="Password" value="" />@Html.ValidationMessage("Password")<br />
+            <input type="submit" name="submit" value="Login" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,20 +1,24 @@
-﻿using _003DropDownList.Common;
+﻿using _002CheckData.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace _003DropDownList.Models
+namespace _002CheckData.Models
 {
     public class Person
     {
         [Required]
         public int Id { get; set; }//请求中使用Person类型Model，必须给Id赋值
 
+        [Required(ErrorMessage ="enter name") ]
+        [StringLength(10, MinimumLength = 5,ErrorMessage ="name最长10最短5")]
+        public string Name { get; set; }//必须赋值且长度最大是10,最小是5（注意一个属性可以有多个特性）
+
         [Required]
         [StringLength(10, MinimumLength = 5)]
-        public string Name { get; set; }//必须赋值且长度最大是10,最小是5（注意一个属性可以有多个特性）
+        public string Password { get; set; }
 
         [Range(1, 100, ErrorMessage = "年龄不对")]
         public int Age { get; set; }//年龄是1-100 
