@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        alert("success1");
+        //$.ajax({
+        //    url: "http://localhost:62814/api/person",
+        //    type: "GET",
+        //    success: function (data) {
+        //        var str = "";
+        //        alert("success2");
+        //        str += "<table><tr><td>Name</td></tr>";
+        //        for (var i = 0; i < data.length; i++) {
+        //            str += "<tr><td>" + data[i].Name + "</td></tr>";
+        //        }
+        //        str += "</table>";
+        //        $("#DivPerson").html(str);
+        //    }
+        //});
+        $.get("localhost:62814/api/person",
+              function (data) {
+                  alert("success2");
+       
+                  //var s = "";
+                  //$(data.Data).each(function (index) { s += data.Data[index].Name + "-" });
+                  //alert(s);
+                  $("#DivPerson").text(data.Message);
+
+              });
+    </script>
+</head>
+<body>
+    <div>
+        <div id="DivPerson"></div>
+    </div>
+</body>
+</html>
