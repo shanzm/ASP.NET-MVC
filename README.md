@@ -5,6 +5,7 @@
 * 1.1 初识MVC--TestController.cs
 * 1.2 简单的增删改查--PersonController.cs
 * 1.3 关于layout--LayoutTestController.cs
+* 2020年4月20日 23:08:40 Update：添加其他的一些Demo
 
 2. 02DropDownList
 
@@ -17,6 +18,7 @@
 * 1.2 数据检验--使用Attribute
 * 1.3 输出数据错误信息--ModelState
 * 1.3 自定义特性进行数据验证--在Common文件夹中添加自定义的特性类
+* 2020年4月20日 23:08:11 Update：添加一个登录检验
 
 4. 04FilterTest1
 
@@ -53,3 +55,14 @@
 11. 011手写IOC-MyIOC
 * 反射程序集获取对象类型
 * 实现属性注入
+
+12. 012任务调度框架Quartz.NET
+* NuGet：Install-Package Quartz -Version 3.0.7  注意版本，各个版本API变化很大
+* 详细说明：https://www.cnblogs.com/shanzhiming/p/12570677.html
+* 封装一个完整的任务，并提供接口（见TestJob2.cs）
+* 在MVC项目中使用Quartz.NET
+
+013. 013WebAPI
+* 创建WebAPI项目
+* 做一个简单的分层，并使用EF
+* 创建测试API的控制台项目和MVC项目
