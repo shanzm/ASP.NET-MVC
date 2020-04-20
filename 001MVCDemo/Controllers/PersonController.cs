@@ -105,9 +105,15 @@ namespace DropDownList1.Controllers
         public ActionResult Delete(long Id)
         {
             SqlParameter param = new SqlParameter("Id", Id);
-            SqlHelper.ExecuteNonquery("delete from T_Person where Id=@Id", CommandType.Text, param);
-
-            return Redirect("~/Person/List");
+            int result = SqlHelper.ExecuteNonquery("delete from T_Person where Id=@Id", CommandType.Text, param);
+            if (result == 1)
+            {
+                return Redirect("~/Person/List");
+            }
+            else
+            {
+                return Content("error");
+            }
 
         }
     }
