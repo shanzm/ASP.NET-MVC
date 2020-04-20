@@ -24,35 +24,39 @@ namespace WebAPIDemo.Controllers
         // GET: api/Person
         //TEST:http://localhost:62814/api/person //请求PersonController控制器中的以get开头的无参请求
         //注意：默认请求是Get请求，所以URL是api/person,
-       
-        public IEnumerable<PersonDto> GetPersonAll()
-        {
-            return pBll.GetPersonAll();
-            // return new string[] { "shanzm1", "shanzm2" };
-        }
 
-        //public PersonDto Get()
+        //public IEnumerable<PersonDto> GetPersonAll()
         //{
-        //    return new PersonDto() { Id = 001, Name = "shanzm", Age = 25 };
+        //    return pBll.GetPersonAll();
+        //    //return new string[] { "shanzm1", "shanzm2" };
         //}
+
+        public string[] Get()
+        {
+            return new string[]{ "ssss","dddd"};
+        }
 
 
         // GET: api/Person/5
-        public string Get(int id)
-        {
-            return "value-shanzm";
-        }
+        //public string Get(int id)
+        //{
+        //    return "value-shanzm";
+        //}
 
 
         //注意api的请求URL中是没有action名字的，Action 定义为什么名字都是无关紧要的。
         //注意其URL是：http://localhost:62814/api/person?num=123456
         //其组成是api/控制器名（不包括Controller）？参数=参数值
+        //public string GetPhoneNum(string Num)
+        //{
+        //    return $"你的手机号是{Num}";
+        //}
+
+
         public string GetPhoneNum(string Num)
         {
             return $"你的手机号是{Num}";
         }
-
-
 
 
         // POST: api/Person
