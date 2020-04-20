@@ -30,16 +30,18 @@ namespace _002CheckData.Controllers
                 new SqlParameter ("@Password",user.Password )
             };
 
-            string sql = "select * from tb_userInfo where userName=@Name and userPass=@Password";
-            int result = SqlHelper.ExecuteNonQuery(sql, System.Data.CommandType.Text, param);
-            if (result == 1)
+            string sql = "select Count(*) from szmUserInfo where UserName=@Name and UserPwd=@Password";
+            var result = SqlHelper.ExecuteScalar(sql, System.Data.CommandType.Text, param);
+            int count = Convert.ToInt16(result);
+            if (count == 1)
             {
                 Session["username"] = user.Name;
                 return Content($"{user.Name }登录成功！");
             }
             else
             {
-                return Redirect("~/Login/Login");
+                ViewBag.returnMes = "密码或用户名错误";
+                return View ();
             }
 
         }
