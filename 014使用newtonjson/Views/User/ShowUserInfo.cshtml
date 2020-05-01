@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowUserInfo</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        //点击按钮1的异步请求
+        $(function () {
+            $("#btnClick1").click(function () {
+                $.ajax({
+                    url: "/user/ShowUserInfoWithJsonResult",
+                    data: "name=shanzm&age=25",
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.CreateTime);//注意Json()对对象序列化后对象的属性依旧是大驼峰命名法
+                        alert(data.Name);
+                        alert(data.Age);
+                    },
+                    error: function () {
+                        alert("Ajax error!");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        //点击按钮2的异步请求
+        $(function () {
+            $("#btnClick2").click(function () {
+                $.ajax({
+                    url: "/user/ShowUserInfoWithJosnNetResult",
+                    data: "name=shanzm&age=25",
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.createTime);//使用newtonjosn对对象序列化后对象属性命名改为小驼峰命名法
+                        alert(data.name);//调试经验：若是这里返回是undefined，则说明data对象中没有该属性，可以检查大小写以及拼写是否正确
+                        alert(data.age);
+                    },
+                    error: function () {
+                        alert("Ajax error!");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        //点击按钮3的异步请求
+        $(function () {
+            $("#btnClick3").click(function () {
+                $.ajax({
+                    url: "/user/ShowUserInfoWithJosnNetResultByFilter",
+                    data: "name=shanzm&age=25",
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.createTime);//使用newtonjosn对对象序列化后对象属性命名改为小驼峰命名法
+                        alert(data.name);//调试经验：若是这里返回是undefined，则说明data对象中没有该属性，可以检查大小写以及拼写是否正确
+                        alert(data.age);
+                    },
+                    error: function () {
+                        alert("Ajax error!");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="btnClick1">按钮1：使用MVC中Json()对对象序列化</button>
+    </div>
+    <div>
+        <button id="btnClick2">按钮2：使用封装的JsonNetResult类的对象对对象序列化</button>
+    </div>
+    <div>
+        <button id="btnClick3">按钮3：使用过滤器实现JsonNetResult对象替换JsonResult对象</button>
+    </div>
+</body>
+
+</html>
