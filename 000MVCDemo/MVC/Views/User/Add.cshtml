@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+    <script type="text/javascript">
+        function ResetForm() {
+            document.getElementById('TxtName').value = "";
+            document.getElementById('TxtAge').value = "";
+            document.getElementById("TxtPwd").value = "";
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        <form action="~/User/Add" method="post">
+            姓名：<input type="text" name="Name" id="TxtName" /><br>
+            年龄：<input type="text" name="Age" id="TxtAge" /><br>
+            密码：<input type="text" name="Password" id="TxtPwd" /><br>
+            <input type="submit" name="BtnSubmit" value="AddNew" /><!--提交按钮-->
+            <input type="submit" name="BtnSubmit" value="Cancel" /><!--取消按钮-->
+            <input type="button" name="BtnReset" value="Reset" onclick="ResetForm();" /><!--清空按钮-->
+        </form>
+    </div>
+</body>
+</html>

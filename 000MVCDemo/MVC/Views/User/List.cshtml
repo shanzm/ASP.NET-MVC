@@ -1,0 +1,33 @@
+﻿@using DemoDTO;
+@model IEnumerable<UserDTO>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <div>
+        <span>当前登录用户： @System.Web.HttpContext.Current.User.Identity.Name</span>     <a href="~/Login/Logout">退出</a>
+    </div>
+        <!--是否验证了该用户   @System.Web.HttpContext.Current.User.Identity.IsAuthenticated-->
+        <table>
+            <thead>
+                <tr><td>Id</td><td>用户名</td><td>年龄</td><td>密码</td><td>编辑</td><td>删除</td></tr>
+            </thead>
+            <tbody>
+                @foreach (UserDTO user in Model)
+                {
+                    <tr><td>@user.Id </td><td>@user.Name </td><td>@user.Age </td><td>@user.Password  </td><td><a href="~/User/Edit?Id=@user.Id ">编辑</a></td><td><a href="~/User/Delete?Id=@user.Id ">删除</a></td></tr>
+                }
+            </tbody>
+        </table>
+        <a href="~/User/Add">新增用户</a>
+   
+</body>
+</html>
