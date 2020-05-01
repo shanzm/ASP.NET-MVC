@@ -22,7 +22,8 @@
           
             用户名:<input type="text" name="Name" value="" />@Html.ValidationMessage("Name")<br />
             密码:<input type="password" name="Password" value="" />@Html.ValidationMessage("Password")<br />
-            <input type="submit" name="submit" value="Login" /><span style="color:red">@ViewBag.returnMes</span>
+            <input type="submit" name="submit" value="Login" />@Html.ValidationMessage("LoginError", new { style = "color:red;" })
+            @*<span style="color:red">@ViewBag.returnMes</span>*@
         </form>
     </div>
 </body>

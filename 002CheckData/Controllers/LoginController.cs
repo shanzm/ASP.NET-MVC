@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace _002CheckData.Controllers
 {
@@ -35,15 +36,25 @@ namespace _002CheckData.Controllers
             int count = Convert.ToInt16(result);
             if (count == 1)
             {
-                Session["username"] = user.Name;
-                return Content($"{user.Name }登录成功！");
+                //创建认证Cookie。可用于以后的认证请求过程中。
+                FormsAuthentication.SetAuthCookie(user.Name, false);
+                //Session["username"] = user.Name;
+                //return Content($"{user.Name }登录成功！");
+                return RedirectToAction("Index", "Login");//登录成功跳转到初始Index页面
             }
             else
             {
-                ViewBag.returnMes = "密码或用户名错误";
-                return View ();
+                ModelState.AddModelError("LoginError", "用户名或密码错误！");
+                // ViewBag.returnMes = "密码或用户名错误";
+                return View();
             }
 
         }
+        [Authorize]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
     }
 }
