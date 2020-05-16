@@ -97,6 +97,30 @@
             });
         });
     </script>
+    <script>
+        //点击按钮5的异步请求
+        $(function () {
+            $("#btnClick5").click(function () {
+                $.ajax({
+                    url: "/user/TestGet",
+                    //data: "name=shanzm&age=25",
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        var item;
+                        $.each(data, function (i, result) {
+                            item =
+                            "<tr><td>" + result['name'] + "</td><td>" + result['age'] + "</td></tr>";
+                            $('.table').append(item);
+                        });
+                    },
+                    error: function () {
+                        alert("Ajax error!");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -112,7 +136,10 @@
     <div>
         <button id="btnClick4">按钮4：使用NewtonJson序列化DataTable</button>
     </div>
-
+    <div>
+        <button id="btnClick5">按钮5：测试NewtonJson接收get请求</button>
+        测试没通过，即：使用现在我们封装的NewtonJson类，序列化的结果，无法返回给get请求，报错：JSON GET is not allowed
+    </div>
     <table class="table">
         <tr><th>name</th><th>age</th></tr>
     </table> 

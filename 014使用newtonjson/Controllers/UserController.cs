@@ -58,5 +58,13 @@ namespace _014使用newtonjson.Controllers
             User user = new User() { Id = 001, Name = name, Age = age, CreateTime = DateTime.Now };
             return Json(user);
         }
+
+        //测试NewtonJson接受Get请求
+        public ActionResult TestGet()
+        {
+            string sql = "select * from Person ";
+            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            return new JsonNetResult() { Data = dt };
+        }
     }
 }
