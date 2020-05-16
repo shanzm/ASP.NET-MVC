@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,6 +36,17 @@ namespace _014使用newtonjson.Controllers
             //可以使用以下代码测试：
             User user = new User() { Id = 001, Name = name, Age = age, CreateTime = DateTime.Now };
             return new JsonNetResult() { Data = user };
+        }
+
+        //使用NewtonJson测试序列化DataTable
+        public ActionResult TestDataTable()
+        {
+
+            //这里我是测试一下使用NewtonJson序列化DataTable
+            //随便在数据中找张表，只要表中有name和age字段即可
+            string sql = "select * from Person ";
+            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            return new JsonNetResult() { Data = dt };   
         }
 
         [JsonNetActionFilter]

@@ -73,6 +73,30 @@
             });
         });
     </script>
+    <script>
+        //点击按钮4的异步请求
+        $(function () {
+            $("#btnClick4").click(function () {
+                $.ajax({
+                    url: "/user/TestDataTable",
+                    data: "name=shanzm&age=25",
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        var item;
+                        $.each(data, function (i, result) {
+                            item =
+                            "<tr><td>" + result['name'] + "</td><td>" + result['age'] + "</td></tr>";
+                            $('.table').append(item);
+                        });
+                    },
+                    error: function () {
+                        alert("Ajax error!");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -85,6 +109,13 @@
     <div>
         <button id="btnClick3">按钮3：使用过滤器实现JsonNetResult对象替换JsonResult对象</button>
     </div>
+    <div>
+        <button id="btnClick4">按钮4：使用NewtonJson序列化DataTable</button>
+    </div>
+
+    <table class="table">
+        <tr><th>name</th><th>age</th></tr>
+    </table> 
 </body>
 
 </html>
