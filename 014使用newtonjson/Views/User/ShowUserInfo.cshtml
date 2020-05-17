@@ -86,7 +86,7 @@
                         var item;
                         $.each(data, function (i, result) {
                             item =
-                            "<tr><td>" + result['name'] + "</td><td>" + result['age'] + "</td></tr>";
+                            "<tr><td>" + result['id'] + "</td><td>" + result['balance'] + "</td></tr>";
                             $('.table').append(item);
                         });
                     },
@@ -110,7 +110,7 @@
                         var item;
                         $.each(data, function (i, result) {
                             item =
-                            "<tr><td>" + result['name'] + "</td><td>" + result['age'] + "</td></tr>";
+                            "<tr><td>" + result['id'] + "</td><td>" + result['balance'] + "</td></tr>";
                             $('.table').append(item);
                         });
                     },
@@ -135,13 +135,14 @@
     </div>
     <div>
         <button id="btnClick4">按钮4：使用NewtonJson序列化DataTable</button>
+        使用NewtonJson序列化DataTable，发送post请求是完全没有问题的。
     </div>
     <div>
         <button id="btnClick5">按钮5：测试NewtonJson接收get请求</button>
         测试没通过，即：使用现在我们封装的NewtonJson类，序列化的结果，无法返回给get请求，报错：JSON GET is not allowed
     </div>
     <table class="table">
-        <tr><th>name</th><th>age</th></tr>
+        <tr><th>用户id</th><th>用户余额balance</th></tr>
     </table> 
 </body>
 

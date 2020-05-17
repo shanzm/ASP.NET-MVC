@@ -38,17 +38,6 @@ namespace _014使用newtonjson.Controllers
             return new JsonNetResult() { Data = user };
         }
 
-        //使用NewtonJson测试序列化DataTable
-        public ActionResult TestDataTable()
-        {
-
-            //这里我是测试一下使用NewtonJson序列化DataTable
-            //随便在数据中找张表，只要表中有name和age字段即可
-            string sql = "select * from Person ";
-            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
-            return new JsonNetResult() { Data = dt };   
-        }
-
         [JsonNetActionFilter]
         public ActionResult ShowUserInfoWithJosnNetResultByFilter(string name, int age)
         {
@@ -59,11 +48,26 @@ namespace _014使用newtonjson.Controllers
             return Json(user);
         }
 
+        //使用NewtonJson测试序列化DataTable
+        public ActionResult TestDataTable()
+        {
+
+            //这里我是测试一下使用NewtonJson序列化DataTable
+            //随便在数据中找张表，只要表中有name和age字段即可
+            string sql = "select * from szmBank ";
+            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            var jsonResult = new JsonNetResult() { Data = dt };
+            return new JsonNetResult() { Data = dt };
+        }
+
         //测试NewtonJson接受Get请求
+        //undone:1.可能是封装的JsonNetResult类的关系，使用get请求返回josn就会出现“json get not allow”
+        //2.new JsonNetResult() { Data = dt ,JsonRequestBehavior.AllowGet };这样写编译无法通过，显示：初始值设定项成员声明符无效
         public ActionResult TestGet()
         {
-            string sql = "select * from Person ";
+            string sql = "select * from szmBank ";
             DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            // return new JsonNetResult() { Data = dt ,JsonRequestBehavior.AllowGet };
             return new JsonNetResult() { Data = dt };
         }
     }
