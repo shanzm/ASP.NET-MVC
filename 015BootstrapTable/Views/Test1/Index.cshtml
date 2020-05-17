@@ -1,0 +1,301 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!--获取当前日期-->
+    <script>
+        $(function () {
+            var myDate = new Date();
+            var date = myDate.toLocaleDateString();     //获取当前日期
+            $("#date").append("<p>" + date + "</p>");
+        });
+    </script>
+    <!--初始化表格-->
+    <script>
+        @*    $(function () {
+            $("#click").click(function () {
+                $('#grid').bootstrapTable({
+                    url: 'test1/index',
+                    method: "post",
+                    queryParams: function (params) {
+                        //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
+                        var temp = {
+                            rows: params.limit,                         //页面大小
+                            page: (params.offset / params.limit) + 1,   //页码
+                            sort: params.sort,      //排序列
+                            sortOrder: params.order, //排位方式（desc，asc）
+                            // queryJson: JSON.stringify(getQuetyData()),  //查询数据]
+                            name: 1000
+                        };
+                        return temp;
+                    },
+                    columns: [{
+                        field: 'id',
+                        title: 'ID'
+                    }, {
+                        field: 'balance',
+                        title: '余额'
+                    }],
+                    //加载成功时执行
+                    onLoadSuccess: function () {
+                    },
+                    //加载失败时执行
+                    onLoadError: function () {
+                        showTips("数据加载失败！");
+                    },
+                });
+            });
+        });
+*@
+    </script>
+
+    <script>
+
+        //$(function () {
+        //    $("#click").click(function () {
+        //        $('#grid').bootstrapTable({
+        //            ajax: function (request) {                    //使用ajax请求
+        //                $.ajax({
+        //                    type: "POST",
+        //                    url: '/test1/index',
+        //                    contentType: 'application/json;charset=utf-8',
+        //                    dataType: 'json',
+        //                    data: request.data,
+        //                    success: function (res) {
+        //                        request.success({
+        //                            row: res.data,
+        //                        });
+        //                        $('#grid').bootstrapTable('load', res.data);
+        //                    },
+        //                    error: function (error) {
+        //                        console.log(error);
+        //                    }
+        //                })
+        //            },
+        //            toolbar: '#toolbar',                //工具按钮用哪个容器
+        //            striped: true,                      //是否显示行间隔色
+        //            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        //            pagination: true,                   //是否显示分页（*）
+        //            sortable: true,                     //是否启用排序
+        //            sortOrder: "asc",                   //排序方式
+        //            queryParams: 'queryParams',         //传递参数（*）
+        //            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+        //            pageNumber: 1,                       //初始化加载第一页，默认第一页
+        //            pageSize: 10,                       //每页的记录行数（*）
+        //            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        //            smartDisplay: false,
+        //            search: false,                      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        //            strictSearch: true,
+        //            showColumns: false,                 //是否显示所有的列
+        //            showRefresh: false,                 //是否显示刷新按钮
+        //            minimumCountColumns: 2,             //最少允许的列数
+        //            clickToSelect: true,                //是否启用点击选中行
+        //            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        //            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+        //            showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
+        //            cardView: false,                    //是否显示详细视图
+        //            detailView: false,                   //是否显示父子表
+        //            columns: [{
+        //                field: 'id',
+        //                title: 'ID'
+        //            }, {
+        //                field: 'balance',
+        //                title: '余额'
+        //            }],
+        //            //加载成功时执行
+        //            onLoadSuccess: function () {
+        //            },
+        //            //加载失败时执行
+        //            onLoadError: function () {
+        //                showTips("数据加载失败！");
+        //            },//列设置
+        //        });
+        //    });
+        //});
+    </script>
+
+
+    <!--第一次查询结果：初始化表格，成功！-->
+    <!--参考：https://www.jb51.net/article/79033.htm -->
+    <script>
+        $(function () {
+            $("#click").click(function () {
+                //1.初始化Table
+                var oTable = new TableInit();
+                oTable.Init();
+            });
+        });
+
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#grid').bootstrapTable('destroy');//先销毁之前的表格数据
+                $('#grid').bootstrapTable({
+                    url: 'index',  //请求后台的URL（*）
+                    method: 'post',   //请求方式（*）
+                    toolbar: '#toolbar',  //工具按钮用哪个容器
+                    striped: true,   //是否显示行间隔色
+                    cache: false,   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,   //是否显示分页（*）
+                    sortable: false,   //是否启用排序
+                    sortOrder: "asc",   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",  //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,   //初始化加载第一页，默认第一页
+                    pageSize: 50,   //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                    strictSearch: true,
+                    clickToSelect: true,  //是否启用点击选中行
+                    height: 460,   //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "id",   //每一行的唯一标识，一般为主键列
+                    cardView: false,   //是否显示详细视图
+                    detailView: false,   //是否显示父子表
+                    columns: [
+                        {
+                            checkbox: true,
+                            visible: true                  //是否显示复选框
+                        }, {
+                            field: 'id',
+                            title: 'ID'
+                        }, {
+                            field: 'balance',
+                            title: '余额'
+                        }],
+                });
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit, //页面大小
+                    offset: params.offset, //页码
+                    sdate: $("#stratTime").val(),
+                    edate: $("#endTime").val(),
+                    sellerid: $("#sellerid").val(),
+                    orderid: $("#orderid").val(),
+                    CardNumber: $("#CardNumber").val(),
+                    maxrows: params.limit,
+                    pageindex: params.pageNumber,
+                    portid: $("#portid").val(),
+                    CardNumber: $("#CardNumber").val(),
+                    tradetype: $('input:radio[name="tradetype"]:checked').val(),
+                    success: $('input:radio[name="success"]:checked').val(),
+                    balance: $("#ordernum").val(),
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+    </script>
+
+    <!--第二次查询结果-->
+    <script>
+        $(function () {
+            $("#merge").click(function () {
+                var row = $.map($('#grid').bootstrapTable('getSelections'), function (row) { return row; });
+                alert(row[0].id)//测试是否获取到选中的行数据
+                alert(JSON.stringify(row))
+                //1.初始化Table
+                var oTable2 = new TableInit2();
+                oTable2.Init();
+            });
+        });
+
+        var TableInit2 = function () {
+            var oTableInit2 = new Object();
+            //初始化Table
+            oTableInit2.Init = function () {
+                $('#grid').bootstrapTable('destroy');//先销毁之前的表格数据
+                $('#grid').bootstrapTable({
+                    url: 'test',  //请求后台的URL（*）
+                    method: 'post',   //请求方式（*）
+                    toolbar: '#toolbar',  //工具按钮用哪个容器
+                    striped: true,   //是否显示行间隔色
+                    cache: false,   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,   //是否显示分页（*）
+                    sortable: false,   //是否启用排序
+                    sortOrder: "asc",   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",  //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,   //初始化加载第一页，默认第一页
+                    pageSize: 50,   //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                    strictSearch: true,
+                    clickToSelect: true,  //是否启用点击选中行
+                    height: 460,   //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "id",   //每一行的唯一标识，一般为主键列
+                    cardView: false,   //是否显示详细视图
+                    detailView: false,   //是否显示父子表
+                    columns: [
+                        {
+                            checkbox: true,
+                            visible: true                  //是否显示复选框
+                        }, {
+                            field: 'id',
+                            title: 'ID'
+                        }, {
+                            field: 'balance',
+                            title: '余额'
+                        }],
+                });
+            };
+
+            //得到查询的参数
+            oTableInit2.queryParams = function (params) {
+                var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit, //页面大小
+                    offset: params.offset, //页码
+                    sdate: $("#stratTime").val(),
+                    edate: $("#endTime").val(),
+                    sellerid: $("#sellerid").val(),
+                    orderid: $("#orderid").val(),
+                    CardNumber: $("#CardNumber").val(),
+                    maxrows: params.limit,
+                    pageindex: params.pageNumber,
+                    portid: $("#portid").val(),
+                    CardNumber: $("#CardNumber").val(),
+                    tradetype: $('input:radio[name="tradetype"]:checked').val(),
+                    success: $('input:radio[name="success"]:checked').val(),
+                    row:JSON.stringify( $.map($('#grid').bootstrapTable('getSelections'), function (row) { return row; })),
+                };
+                return temp;
+            };
+            return oTableInit2;
+        };
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="date"></div>
+    </div>
+    <div>
+        <label>总单号：</label><input type="text" id="ordernum" value="" />
+    </div>
+    <div>
+        <input type="button" id="click" value="搜索" />
+    </div>
+    <div>
+        <input type="button" id="merge" value="合并打印" />
+    </div>
+    <div>
+        <table id="grid"></table>
+    </div>
+</body>
+</html>
