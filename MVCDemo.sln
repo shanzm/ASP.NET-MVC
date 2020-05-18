@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "005Html辅助类", "005Html辅助类\005Html辅助类.csproj", "{96A2F836-B7E2-441A-B61D-EFC867025DC6}"
 EndProject
@@ -52,6 +52,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bll", "013-WebAPI\Bll\Bll.csproj", "{0990196C-3DE8-4DFD-994D-865421144E6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDemo", "013-WebAPI\WebAPIDemo\WebAPIDemo.csproj", "{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "014使用newtonjson", "014使用newtonjson\014使用newtonjson.csproj", "{8133C5F5-0B23-41FC-85DA-608BE81CFAAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "015BootstrapTable", "015BootstrapTable\015BootstrapTable.csproj", "{69350306-3001-4E0C-850D-90D55A38EA6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +151,14 @@ Global
 		{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8133C5F5-0B23-41FC-85DA-608BE81CFAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8133C5F5-0B23-41FC-85DA-608BE81CFAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8133C5F5-0B23-41FC-85DA-608BE81CFAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8133C5F5-0B23-41FC-85DA-608BE81CFAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69350306-3001-4E0C-850D-90D55A38EA6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69350306-3001-4E0C-850D-90D55A38EA6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69350306-3001-4E0C-850D-90D55A38EA6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69350306-3001-4E0C-850D-90D55A38EA6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,5 +175,8 @@ Global
 		{35FD46D2-C177-4A2D-8D38-A62FD7CC0759} = {B971E6DE-2E00-4141-92D9-93BFC0B92294}
 		{0990196C-3DE8-4DFD-994D-865421144E6C} = {B971E6DE-2E00-4141-92D9-93BFC0B92294}
 		{57A2FF4B-BD0A-4AD5-B5A6-0B10BA372817} = {B971E6DE-2E00-4141-92D9-93BFC0B92294}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D7EED8A-3977-4DAC-A9D8-B2FEB5111DAC}
 	EndGlobalSection
 EndGlobal
