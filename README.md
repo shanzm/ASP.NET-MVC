@@ -62,7 +62,16 @@
 * 封装一个完整的任务，并提供接口（见TestJob2.cs）
 * 在MVC项目中使用Quartz.NET
 
-013. 013WebAPI
+013. 013WebAPI----待续
 * 创建WebAPI项目
 * 做一个简单的分层，并使用EF
 * 创建测试API的控制台项目和MVC项目
+
+014. 014使用NewtonJson
+* 引入：PM>install-package newtonsoft.json
+* 封装NewJsonResult类代替MVC中Json() 方法
+* 使用AOP的方式，实现替换Josn()方法
+
+015. BootstrapTable
+* 使用BootstrapTable
+* 使用post请求数据某，返回Json数据，绑定到table中
