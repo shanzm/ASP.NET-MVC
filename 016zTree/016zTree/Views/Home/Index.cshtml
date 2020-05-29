@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <script src="~/zTree/js/jquery-1.4.4.min.js"></script>
+    <script src="~/zTree/js/jquery.ztree.core.js"></script>
+    <script>
+        var setting = {
+            async: {
+                enable: true,//开启异步加载模式，默认为false
+                type: "post",//ajax请求方法，默认为post
+                url: "index",//请求地址
+                autoParam: ["id"],//设置id属性为自动提交的参数，比如说异步加载父节点的子节点是，将提交父节点的id
+            }
+        };
+
+        //console.log(zNodes);
+        $(function () {
+            $.fn.zTree.init($("#treeDemo"), setting);
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        <div>hello zTree!</div>
+        <div>参考：</div>
+        <div> * https://www.cnblogs.com/mobobo/p/5543729.html</div>
+        <div> * https://www.cnblogs.com/zpyplan/p/9605769.html</div>
+        <div> * https://www.cnblogs.com/niuzaihenmang/p/5626009.html</div>
+        <hr />
+    </div>
+    <div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</body>
+</html>
