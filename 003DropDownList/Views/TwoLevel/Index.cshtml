@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+            $("#SEX").change(function () {
+                var url = "/practice/GetName/" + $("#SEX").val() + "/";
+                $.getJSON(url, function (data) {
+                    $("#NAME").html('');
+                    $.each(data, function (i, item) {
+                        $("#NAME").append($("<option></option>").val(item).html(item));
+                    })
+                })
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div>
+        @ViewBag.Date
+        性别：@Html.DropDownList("SEX", @ViewData["SEX"] as IEnumerable<SelectListItem>, "--Please Choose--")
+
+        名字：@Html.DropDownList("NAME", @ViewData["NAME"] as IEnumerable<SelectListItem>, "--Please Choose--")
+    </div>
+</body>
+</html>

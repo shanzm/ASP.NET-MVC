@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,9 +103,11 @@
     <Compile Include="Controllers\DropDownList2Controller.cs" />
     <Compile Include="Controllers\DropDownList3Controller.cs" />
     <Compile Include="Controllers\IsAjaxRequestController.cs" />
+    <Compile Include="Controllers\TwoLevelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\namelist.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -115,6 +118,7 @@
     <Content Include="Views\DropDownList2\Index.cshtml" />
     <Content Include="Views\DropDownList3\Index.cshtml" />
     <Content Include="Views\IsAjaxRequest\Index.cshtml" />
+    <Content Include="Views\TwoLevel\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
