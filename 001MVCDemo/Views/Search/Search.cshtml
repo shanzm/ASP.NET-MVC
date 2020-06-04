@@ -49,6 +49,7 @@
                 else {
 
                     $("#con").show();
+                    $(document).one("click", function () { $("#con").hide(); });//对document绑定点击方法，点击隐藏#con，实现点击网上其他地方隐藏提示框，参考：https://www.cnblogs.com/Binblink/p/7624778.html
                     $.post("Search", { "title": title }, function (data) {
                         //alert(data);//测试后端传来的数据
                         //var data = JSON.parse(data);
