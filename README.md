@@ -76,3 +76,7 @@
 015. BootstrapTable
 * 使用BootstrapTable
 * 使用post请求数据某，返回Json数据，绑定到table中
+
+016. zTree
+* 官网下载clone:https://gitee.com/zTree/zTree_v3.git
+* 使用简单Json数据格式，实现一棵zTree
