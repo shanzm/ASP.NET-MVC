@@ -20,26 +20,10 @@ namespace _016zTree.Controllers
         {
             return View();
         }
-        
-        //[HttpPost]
-        //public ActionResult Index1(string id)
-        //{
-        //    string sql = "select * from Company";
-        //    DataTable dt = SqlHelper.GetDataTable(sql, System.Data.CommandType.Text);
-           
-        //    return new JsonNetResult() { Data = dt };
-        //}
 
 
-
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
         [HttpPost]
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
             string sql = "select * from Company";
             DataTable dt = SqlHelper.GetDataTable(sql, System.Data.CommandType.Text);
