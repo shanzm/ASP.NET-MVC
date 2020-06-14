@@ -11,18 +11,33 @@ namespace _016zTree.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// 数据写死，演示zTree
+        /// 案例来源：在zTree官网下载文档，文档中的zTree/demo/cn/core中的SimpleData.html
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index1()
+        {
+            return View();
+        }
+        
+        //[HttpPost]
+        //public ActionResult Index1(string id)
+        //{
+        //    string sql = "select * from Company";
+        //    DataTable dt = SqlHelper.GetDataTable(sql, System.Data.CommandType.Text);
+           
+        //    return new JsonNetResult() { Data = dt };
+        //}
+
+
+
+
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
-        [HttpGet]
-        public ActionResult Index2()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Index(string id)
         {

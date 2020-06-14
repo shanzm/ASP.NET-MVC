@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <script src="~/zTree/js/jquery-1.4.4.min.js"></script>
+    <script src="~/zTree/js/jquery.ztree.core.js"></script>
+    <script src="~/zTree/js/jquery.ztree.excheck.min.js"></script><!--如果需要用到 编辑功能 或 checkbox / radio 还需要-->
+    <script>
+
+        //定义接收节点数据的变量
+
+        //注意zTree的简单数据模式中的key：id和pId和name,注意大小写
+        var zNodes = [
+            { "id": 1, "pId": 0, "name": "中国", open: true },
+            { "id": 2, "pId": 1, "name": "江苏省" },
+            { "id": 3, "pId": 2, "name": "苏州市" },
+            { "id": 4, "pId": 3, "name": "吴中区" },
+            { "id": 5, "pId": 1, "name": "山东省" },
+            { "id": 6, "pId": 5, "name": "济南市", isParent: true },//若是不设置isParent，其下面没有定义的子节点，所以图标显示的是子节点的图标
+            { "id": 7, "pId": 5, "name": "青岛市" },
+            { "id": 8, "pId": 5, "name": "烟台市" },
+            { "id": 9, "pId": 2, "name": "南京市" },
+            { "id": 10, "pId": 9, "name": "玄武区" },
+            { "id": 11, "pId": 7, "name": "四方区" }
+        ];
+        //节点配置信息
+        var setting = {
+            check: {//显示复选框，注意添加jquery.ztree.excheck.min.js的引用
+                enable: true
+            },
+            data: {
+                simpleData: {//简单JosN数据格式，即使用id和pId区分父子节点
+                    enable: true
+                }
+            }
+        };
+
+        //初始化一棵树
+        $(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        })
+
+
+
+
+    </script>
+</head>
+<body>
+    <div>
+        <div>hello zTree!</div>
+        <div>参考：</div>
+        <div> * https://www.cnblogs.com/mobobo/p/5543729.html</div>
+        <div> * https://www.cnblogs.com/zpyplan/p/9605769.html</div>
+        <div> * https://www.cnblogs.com/niuzaihenmang/p/5626009.html</div>
+        <hr />
+    </div>
+    <div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</body>
+</html>
