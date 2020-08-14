@@ -26,6 +26,7 @@ namespace _007传统路由
             //    );
             #endregion
             //简洁写的法
+            //其实上面的写法就是把函数的形参名带着，在C#中的任何函数都是可以这样写的
             routes.MapRoute("static", "welcome", new { controller = "Home", action = "Index" });
 
             //路由的格式：控制器名/Action名/id值
@@ -49,6 +50,8 @@ namespace _007传统路由
 
             //这里注意：直接调试输入路由：localhost://65043/2020/08/11 会报错，因为该url首先匹配的是上面的control/action/id，所以会报错，因为我们就没有名称为2020的控制器
             //所有需要调试的话，可以先把上面的Default路由注释掉
+            //注意：这里MapRoute（）使用了四个参数，ctrl+shift+space查看智能提示理解了
+            //第一个参数是路由名，第二个参数是路由规则，第三个参数就是默认路由，第四个参数就是路由规则的约束
             #endregion
             routes.MapRoute("blogs", "{year}/{month}/{day}", new { controller = "blog", action = "index" }, new { year = @"\d{4}", month = @"\d{2}", day = @"\d{2}" });
 
