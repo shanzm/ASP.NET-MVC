@@ -20,6 +20,11 @@ namespace _007传统路由.Controllers
             return Content(id.ToString());
         }
 
+        public ActionResult Time()
+        {
+            return View("Time",(object)"1111");
+        }
+
         public ActionResult CreateURL()
         {
             return View();
