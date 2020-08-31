@@ -30,6 +30,8 @@ namespace _007传统路由
             routes.MapRoute("static", "welcome", new { controller = "Home", action = "Index" });
 
             //路由的格式：控制器名/Action名/id值
+            //注意我们这里设置的路由规则中controller和action和id都是加了个大括号，本质就是占位符，所以任何的controller和action都可以和这个路由规则匹配
+            //而上面的路由规则中URL为welcome，匹配的就是welcome这个单词
             //设置控制器名默认为：Home，action默认为：Index，id为可选
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
