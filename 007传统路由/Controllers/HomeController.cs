@@ -29,5 +29,10 @@ namespace _007传统路由.Controllers
         {
             return View();
         }
+
+        public ActionResult Refuse()
+        {
+            return View();
+        }
     }
 }

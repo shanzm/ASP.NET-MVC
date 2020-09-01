@@ -107,6 +107,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\CreateURL.cshtml" />
     <Content Include="Views\Home\Time.cshtml" />
+    <Content Include="Views\Home\Refuse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

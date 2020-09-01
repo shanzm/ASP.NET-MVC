@@ -82,4 +82,27 @@ namespace _007传统路由
             //也可以使用@Url.RouteUrl()来生成URL，具体见本项目中的CreateURL.cshtml
         }
     }
+
+    public class ChromeRoute : RouteBase
+    {
+        public override RouteData GetRouteData(HttpContextBase httpContext)
+        {
+            if (httpContext.Request.UserAgent.Contains("Mozilla/5.0 (Windows NT 10.0; Win64; x64)"))//Chrome中Network中的user-agent，表示是使用Chrome浏览器访问
+            {
+                return null;//若是Chrome浏览器则正常访问
+            }
+            else
+            {
+                RouteData routeData = new RouteData(this, new MvcRouteHandler());
+                routeData.Values.Add("controller", "Home");
+                routeData.Values.Add("action", "refuse");
+                return routeData;
+            }
+        }
+
+        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
+        {
+            return null;
+        }
+    }
 }
