@@ -14,6 +14,8 @@ namespace _007传统路由
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.Add("Chrome", new ChromeRoute());//在这里添加我们自定义的路由过滤
+
             //注意传统路由和特性路由是可以混合使用的，建议把特性路由放在最前，因为特性路由相对于传统路由更加具体，传统路由更加宽泛自由
             routes.MapMvcAttributeRoutes();
 
@@ -87,7 +89,9 @@ namespace _007传统路由
     {
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
-            if (httpContext.Request.UserAgent.Contains("Mozilla/5.0 (Windows NT 10.0; Win64; x64)"))//Chrome中Network中的user-agent，表示是使用Chrome浏览器访问
+            if (httpContext.Request.UserAgent.Contains("Mozilla/5.0 (Windows NT 6.1; Win64; x64)"))
+            //这串字符是从Chrome中Network中的user-agent，表示是使用Chrome浏览器访问
+            //注意不同的电脑系统，这个字符串是不一样的
             {
                 return null;//若是Chrome浏览器则正常访问
             }
@@ -95,7 +99,7 @@ namespace _007传统路由
             {
                 RouteData routeData = new RouteData(this, new MvcRouteHandler());
                 routeData.Values.Add("controller", "Home");
-                routeData.Values.Add("action", "refuse");
+                routeData.Values.Add("action", "refuse");//这里即跳转到：home/refuse页面
                 return routeData;
             }
         }
