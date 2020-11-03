@@ -28,7 +28,7 @@ namespace _016zTree
     public class SqlHelper
     {
         private static readonly string connStr =
-            ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            ConfigurationManager.ConnectionStrings["connStr_gssi"].ConnectionString;
 
         //返回查询结果的的表
         public static DataTable GetDataTable(string sql, CommandType type, params  SqlParameter[] param)

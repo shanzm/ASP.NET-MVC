@@ -17,8 +17,16 @@
             async: {
                 enable: true,//开启异步加载模式，默认为false
                 type: "post",//ajax请求方法，默认为post
-                url: "index",//请求地址
+                url: "GetZtreeNodeJson",//请求地址
                 autoParam: ["id"],//设置id属性为自动提交的参数，比如说异步加载父节点的子节点是，将提交父节点的id
+            },
+            data: {
+                simpleData: {
+                    enabale: true,
+                    idKey: "id",
+                    pIdKey: "pid",
+                    rootPId:0
+                }
             }
         };
 
