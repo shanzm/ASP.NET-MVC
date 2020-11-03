@@ -85,6 +85,10 @@ namespace _007传统路由
         }
     }
 
+    
+    /// <summary>
+    /// 自定义一个路由配置类，限制用户访问可以使用的浏览器
+    /// </summary>
     public class ChromeRoute : RouteBase
     {
         public override RouteData GetRouteData(HttpContextBase httpContext)
@@ -92,6 +96,7 @@ namespace _007传统路由
             if (httpContext.Request.UserAgent.Contains("Mozilla/5.0 (Windows NT 6.1; Win64; x64)"))
             //这串字符是从Chrome中Network中的user-agent，表示是使用Chrome浏览器访问
             //注意不同的电脑系统，这个字符串是不一样的
+            //比如说win10系统中这里就是：Mozilla/5.0 (Windows NT 10.0; Win64; x64)
             {
                 return null;//若是Chrome浏览器则正常访问
             }
