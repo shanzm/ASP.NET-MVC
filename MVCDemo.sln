@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "015BootstrapTable", "015Boo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "016zTree", "016zTree\016zTree.csproj", "{80295BC5-872F-4324-805D-23B6D2573FEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "017Dapper", "017Dapper\017Dapper.csproj", "{2C53B5D8-2554-40AA-9FC4-5DABFCFDE6DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{80295BC5-872F-4324-805D-23B6D2573FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80295BC5-872F-4324-805D-23B6D2573FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80295BC5-872F-4324-805D-23B6D2573FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C53B5D8-2554-40AA-9FC4-5DABFCFDE6DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C53B5D8-2554-40AA-9FC4-5DABFCFDE6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C53B5D8-2554-40AA-9FC4-5DABFCFDE6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C53B5D8-2554-40AA-9FC4-5DABFCFDE6DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
