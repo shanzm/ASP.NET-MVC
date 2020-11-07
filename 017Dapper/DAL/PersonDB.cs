@@ -1,5 +1,6 @@
 ﻿using _017Dapper.Model;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -137,6 +138,120 @@ namespace _017Dapper.DAL
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Person>("select * from Person where Id=@Id", person).FirstOrDefault();
+            }
+        }
+
+
+        /// <summary>
+        /// 查询条件中使用IN
+        /// </summary>
+        /// <returns></returns>
+        public static List<Person> RetrieveWithIn(int[] argIds)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person where Id in @Ids";
+                return connection.Query<Person>(sql, new { Ids = argIds }).ToList();
+
+            }
+        }
+
+
+        /// <summary>
+        /// 多语句操作：sql中多个查询结果集
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Tuple<List<Person>, List<Person>> GetMultiQuery()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person where Age<14;select * from Person where Age=15";
+                var queryResult = connection.QueryMultiple(sql);
+                List<Person> persons1 = queryResult.Read<Person>().ToList();//接收第一个select查询的结果
+                List<Person> persons2 = queryResult.Read<Person>().ToList();//接收第二个select查询的结果
+
+
+                //使用元祖（C#6.0语法）实现一个函数返回多个返回值
+                Tuple<List<Person>, List<Person>> tupleListPerson = new Tuple<List<Person>, List<Person>>(persons1, persons2);
+                return tupleListPerson;
+            }
+        }
+
+
+        #region 使用Dapper查询返回其他一般类型
+        /// <summary>
+        /// 使用Dapper查询结果为DataTable类型
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable QueryReturnDataTable()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person";
+                DataTable dtPerson = new DataTable();
+                IDataReader dataReader = connection.ExecuteReader(sql);
+                dtPerson.Load(dataReader);
+
+                return dtPerson;
+            }
+        }
+
+
+        /// <summary>
+        /// 使用Dapper查询结果为Dictionary类型
+        /// </summary>
+        public static Dictionary<int, int> QueryReturnDictionary()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select Id,Age from Person";
+                Dictionary<int, int> dicPerson = connection.Query(sql).ToDictionary(item => (int)item.Id, item => (int)item.Age);//注意这里使用id作为Dictionary的key,Dictionary的key不能重复
+                return dicPerson;
+            }
+        }
+
+
+        /// <summary>
+        /// 标量查询：使用Dapper查询结果为Dictionary类型
+        /// </summary>
+        /// <returns></returns>
+        public static int QueryReturnInt()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select count(*) from Person";
+                int count = connection.Query<int>(sql).FirstOrDefault();
+                return count;
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 连接查询
+        /// </summary>
+        public static List<PersonWithClass> QuerywithJoin()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
+                //这个PersonWithClass类就是根据查询结果中的字段而创建的
+                return connection.Query<PersonWithClass>(sql).ToList();
+            }
+        }
+
+
+        /// <summary>
+        /// 连接查询
+        /// </summary>
+        /// <returns></returns>
+        public static List<PersonWithClass2> QueryWithJoin()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
+               // return connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(sql, (personWithClass2, schoolClass) => { personWithClass2.SchoolClass = schoolClass; return personWithClass2; });
             }
         }
     }

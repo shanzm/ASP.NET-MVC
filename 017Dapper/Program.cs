@@ -2,14 +2,20 @@
 using _017Dapper.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 
 #region 说明
-///0. 参考：https://mp.weixin.qq.com/s?__biz=MzI1NjEyODg0OQ==&mid=2247492961&idx=1&sn=d581eb31d47f231c5c6c338983912ae0&chksm=ea29c75fdd5e4e49b76891e8d8dd2669a939d249af3a31f8cf110d9d45fdb44d61d696c3e9b3&mpshare=1&scene=24&srcid=1011KwIW7YgGLzNMZH0iCm8a&sharer_sharetime=1602402592887&sharer_shareid=fa5b26e50d028927a27a58e92114971d&ascene=14&devicetype=android-28&version=27001355&nettype=WIFI&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=AUTxvE3%2F%2BuXaaXKmTSOSrAE%3D&pass_ticket=zvY0ksut6badPUenFfDiuHjo9WU6disyTJ%2FNROqgAZu%2FJucR3mVybBFTpwBEAoxe&wx_header=0
+///0. 参考：https://github.com/StackExchange/Dapper
+///0. 参考：https://www.cnblogs.com/huangxincheng/p/5832281.html
+///0. 参考：https://www.cnblogs.com/flywong/p/9666963.html
+///0. 参考：https://blog.csdn.net/qq_39360549/article/details/85291270
 ///1. 安装dapper:nuget>install-package dapper
-///2. 定义一个Person类，有三个属性：Id,Name,Age
-///3. 定义一个Person表，有三个字段：Id,Name,Age
-///4. 定义一个PersonDB类，操作Person表
+///2. 定义一个Person类，有三个属性：Id,Name,Age,ClassId
+///3. 定义一个Person表，有三个字段：Id,Name,Age,ClassId
+///4. 定义一个Class类，有三个属性：ClassId,ClassName,ClassAddress，同时创建与之对应的table
+///5. 定义一个PersonDB类，操作Person表
 #endregion
 
 namespace _017Dapper
@@ -33,8 +39,13 @@ namespace _017Dapper
 
             //查询
             //RetrievePersons();
-            RetrievePersonById();
-
+            //RetrievePersonById();
+            //RetrievePersonWithIn();
+            //RetrieveMultiQuery();
+            //QueryDataTable();
+            //QueryDictionary();
+            //QueryInt();
+            QueryWithJoin();
 
             Console.ReadKey();
         }
@@ -120,8 +131,58 @@ namespace _017Dapper
         static void RetrievePersonById()
         {
             Person person = new Person() { Id = 3 };
-            Person personResult= PersonDB.Retrieve(person);
+            Person personResult = PersonDB.Retrieve(person);
             Console.WriteLine(personResult.Name);
+        }
+
+        //sql中查询条件使用in
+        static void RetrievePersonWithIn()
+        {
+            int[] argIds = { 4, 5 };
+            List<Person> persons = PersonDB.RetrieveWithIn(argIds);
+            persons.ForEach(n => Console.WriteLine(n.Name));
+        }
+
+        //sql多语句查询，即sql语句有多个返回
+        static void RetrieveMultiQuery()
+        {
+            var queryResult = PersonDB.GetMultiQuery();
+            Console.WriteLine("二元组的第一个分量");
+            queryResult.Item1.ForEach(n => Console.WriteLine(n.Name + n.Age));
+            Console.WriteLine("二元组的第二个分量");
+            queryResult.Item2.ForEach(n => Console.WriteLine(n.Name + n.Age));
+        }
+
+        //使用Dapper查询返回Datatable
+        static void QueryDataTable()
+        {
+            DataTable dtPerson = PersonDB.QueryReturnDataTable();
+            foreach (DataRow dr in dtPerson.Rows)
+            {
+                Console.WriteLine(dr["Name"].ToString());
+            }
+        }
+
+        //使用Dapper查询返回Dictionary
+        static void QueryDictionary()
+        {
+            Dictionary<int, int> keyValuePairs = PersonDB.QueryReturnDictionary();
+            Array.ForEach(keyValuePairs.ToArray(), n => Console.WriteLine($"Id:{n.Key},Age:{n.Value}"));
+            //keyValuePairs.ToArray()的结果是KeyValuePair<int,int>[]
+            //Dictionary可以看作是KeyValuePair类型的集合
+        }
+
+        // 使用Dapper查询返回Int类型
+        static void QueryInt()
+        {
+            Console.WriteLine($"table count={PersonDB.QueryReturnInt()}");
+        }
+
+        //连接查询
+        static void QueryWithJoin()
+        {
+            List<PersonWithClass> listPersonWithClass = PersonDB.QuerywithJoin();
+            listPersonWithClass.ForEach(item => Console.WriteLine(item.Name+" "+item.ClassName));
         }
     }
 }

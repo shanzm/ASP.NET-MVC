@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="DAL\PersonDB.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonWithClass.cs" />
+    <Compile Include="Model\PersonWithClass2.cs" />
+    <Compile Include="Model\SchoolClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
