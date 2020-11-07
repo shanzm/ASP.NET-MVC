@@ -1,0 +1,58 @@
+﻿USE [ShanTest]
+GO
+/****** Object:  Table [dbo].[Class]    Script Date: 2020-11-07 17:00:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Class](
+	[ClassId] [nvarchar](50) NULL,
+	[ClassName] [nvarchar](50) NULL,
+	[ClassAddress] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Person]    Script Date: 2020-11-07 17:00:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Person](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Age] [int] NULL,
+	[ClassId] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+INSERT [dbo].[Class] ([ClassId], [ClassName], [ClassAddress]) VALUES (N'11', N'一年级一班', N'一楼')
+GO
+INSERT [dbo].[Class] ([ClassId], [ClassName], [ClassAddress]) VALUES (N'22', N'二年级二班', N'二楼')
+GO
+INSERT [dbo].[Class] ([ClassId], [ClassName], [ClassAddress]) VALUES (N'33', N'三年级三班', N'三楼')
+GO
+SET IDENTITY_INSERT [dbo].[Person] ON 
+
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (2, N'Jerry', 7, N'11')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (3, N'Bob', 7, N'11')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (4, N'Allen', 7, N'11')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (5, N'Andy', 8, N'22')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (6, N'Beck', 8, N'22')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (7, N'Billy', 8, N'22')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (8, N'Jack', 9, N'33')
+GO
+INSERT [dbo].[Person] ([Id], [Name], [Age], [ClassId]) VALUES (9, N'Jackson', 9, N'33')
+GO
+SET IDENTITY_INSERT [dbo].[Person] OFF
+GO
