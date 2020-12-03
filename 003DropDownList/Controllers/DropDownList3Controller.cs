@@ -13,9 +13,10 @@ namespace _003DropDownList.Controllers
         public ActionResult Index()
         {
             List<Person> list = new List<Person>();
-            list.Add(new Person() { Id = 001, Name = "张三", Age = 12 });
-            list.Add(new Person() { Id = 0022, Name = "李四", Age = 13 });
-            list.Add(new Person() { Id = 003, Name = "王五", Age = 14 });
+            list.Add(new Person() { Id = 001, Name = "张三", Age = 12, Email = "a" });
+            list.Add(new Person() { Id = 0022, Name = "李四", Age = 13, Email = "b" });
+            list.Add(new Person() { Id = 003, Name = "王五", Age = 14, Email = "c" });
+            list.Add(new Person() { Id = 90, Name = "test", Age = 13, Email = "d" });
 
             //使用SelectList类型的集合对list进行包装
             //SelectList()对象的构造函数有很多重载
@@ -24,8 +25,9 @@ namespace _003DropDownList.Controllers
             //第三个参数：string dataTextField是在option标签中的InterText值（即显示的值）
             //注意上面的两个参数的取值是Person类型的属性名
             //第四个参数：object selectedValue，表示被选中的那个option标签的value值
-            SelectList selectList = new SelectList(list, "Id", "Name",22);
-            return View(selectList );
+            SelectList selectList = new SelectList(list, "Email", "Name", "d");
+            ViewBag.selectList2 = new SelectList(list, "Id", "Name", 22);
+            return View(selectList);
         }
     }
 }

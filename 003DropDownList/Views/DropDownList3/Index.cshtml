@@ -14,6 +14,7 @@
     <div> 
         @Html.DropDownList("pid",Model)
         @Html.ListBox("pid2",Model)
+        @Html.ListBox("usedViewbag",ViewBag.selectList2 as IEnumerable<SelectListItem>)
     </div>
 </body>
 </html>
