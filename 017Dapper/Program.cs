@@ -41,11 +41,12 @@ namespace _017Dapper
             //RetrievePersons();
             //RetrievePersonById();
             //RetrievePersonWithIn();
+            RetrievePersonWithLike();
             //RetrieveMultiQuery();
             //QueryDataTable();
             //QueryDictionary();
             //QueryInt();
-            QueryWithJoin();
+            //QueryWithJoin();
 
             Console.ReadKey();
         }
@@ -93,8 +94,8 @@ namespace _017Dapper
         {
             List<Person> persons = new List<Person>()
            {
-               new Person (){Id=2},
-               new Person (){Id=3}
+               new Person (){Id=2,Age=100},
+               new Person (){Id=3,Age=100}
            };
             int effectNum = PersonDB.Update(persons);
             Console.WriteLine($"受影响行数{effectNum}");
@@ -143,6 +144,14 @@ namespace _017Dapper
             persons.ForEach(n => Console.WriteLine(n.Name));
         }
 
+        //sql中使用like模糊查询
+        static void RetrievePersonWithLike()
+        {
+            string partName = "b";
+            List<Person> persons = PersonDB.RetrieveWithLike(partName);
+            persons.ForEach(n => Console.WriteLine(n.Name));
+        }
+
         //sql多语句查询，即sql语句有多个返回
         static void RetrieveMultiQuery()
         {
@@ -182,7 +191,7 @@ namespace _017Dapper
         static void QueryWithJoin()
         {
             List<PersonWithClass> listPersonWithClass = PersonDB.QuerywithJoin();
-            listPersonWithClass.ForEach(item => Console.WriteLine(item.Name+" "+item.ClassName));
+            listPersonWithClass.ForEach(item => Console.WriteLine(item.Name + " " + item.ClassName));
         }
     }
 }

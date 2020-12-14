@@ -16,6 +16,18 @@ namespace _017Dapper.DAL
         private static readonly string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connStr"].ToString();
 
 
+        #region Dapper 中的Excuse
+
+        ///Dapper.NET是一个简单的ORM，专门从SQL查询结果中快速生成对象
+        ///Dapper.NET是通过对IDbConnection接口进行扩展。
+        ///关于Excuse()函数，可以执行 1.存储过程，2.Insert语句，3.Update语句，4.Delete语句
+        ///Excuse()函数有五个参数
+        ///第一个参数：sql:要执行的sql语句
+        ///第二个参数：param:sql语句中的参数，默认为null
+        ///第三个参数：transaction：是否需要使用事务，默认为null
+        ///第四个参数：commandTimeout:sql执行超时时间，默认为null
+        ///第五个参数：commandType:sql类型，是sql语句还是存储过程，默认为null
+
         /// <summary>
         /// 插入一个Person记录
         /// </summary>
@@ -25,6 +37,7 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
+                //connection.Open();//我看网上一些博客中是这样写的，但是其实是没有必要的，使用dapper不需要考虑conn是否连接，在执行dapper时自行判断 open状态，如果没有打开它会自己打开
                 //Dapper中的Execute执行的方式返回受影响的行数
                 return connection.Execute("insert into Person(Name,Age) values (@Name,@Age)", person);
             }
@@ -110,10 +123,11 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Execute("update Person set Age=Age+1 where Id=@Id", persons);
+                return connection.Execute("update Person set Age=@Age where Id=@Id", persons);
             }
         }
 
+        #endregion
 
         /// <summary>
         /// 无参数查询
@@ -153,6 +167,20 @@ namespace _017Dapper.DAL
                 string sql = "select * from Person where Id in @Ids";
                 return connection.Query<Person>(sql, new { Ids = argIds }).ToList();
 
+            }
+        }
+
+
+        /// <summary>
+        /// 使用like模糊查询
+        /// </summary>
+        /// <param name="partName"></param>
+        /// <returns></returns>
+        public static List<Person> RetrieveWithLike(string partName)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Person>("select * from person where name like @name", new { name = $"%{partName}%" }).ToList();
             }
         }
 
@@ -246,13 +274,13 @@ namespace _017Dapper.DAL
         /// 连接查询
         /// </summary>
         /// <returns></returns>
-        public static List<PersonWithClass2> QueryWithJoin()
-        {
-            using (IDbConnection connection = new SqlConnection(connectionString))
-            {
-                string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
-               // return connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(sql, (personWithClass2, schoolClass) => { personWithClass2.SchoolClass = schoolClass; return personWithClass2; });
-            }
-        }
+        //public static List<PersonWithClass2> QueryWithJoin()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
+        //       // return connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(sql, (personWithClass2, schoolClass) => { personWithClass2.SchoolClass = schoolClass; return personWithClass2; });
+        //    }
+        //}
     }
 }
