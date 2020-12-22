@@ -11,6 +11,8 @@ using System.Linq;
 ///0. 参考：https://www.cnblogs.com/huangxincheng/p/5832281.html
 ///0. 参考：https://www.cnblogs.com/flywong/p/9666963.html
 ///0. 参考：https://blog.csdn.net/qq_39360549/article/details/85291270
+///0. 参考：https://www.cnblogs.com/pengze0902/p/6523458.html
+///0. 参考：https://esofar.gitbooks.io/dapper-tutorial-cn/content/utilities/stored-procedure.html
 ///1. 安装dapper:nuget>install-package dapper
 ///2. 定义一个Person类，有三个属性：Id,Name,Age,ClassId
 ///3. 定义一个Person表，有三个字段：Id,Name,Age,ClassId
@@ -41,13 +43,19 @@ namespace _017Dapper
             //RetrievePersons();
             //RetrievePersonById();
             //RetrievePersonWithIn();
-            RetrievePersonWithLike();
+            //RetrievePersonWithLike();
+            //RetrievePersonWithLikeAndIn();
             //RetrieveMultiQuery();
             //QueryDataTable();
             //QueryDictionary();
             //QueryInt();
             //QueryWithJoin();
 
+            //执行存成过程
+            //ExecuteStoreProcedure();
+            //ExecuteStoreProcedureWithParam();
+            //ExecuteStoreProcedureInsert();
+            ExecuteStoreProcudureMoreThanOnce();
             Console.ReadKey();
         }
 
@@ -152,6 +160,13 @@ namespace _017Dapper
             persons.ForEach(n => Console.WriteLine(n.Name));
         }
 
+        //sql中使用in和模糊查询
+        static void RetrievePersonWithLikeAndIn()
+        {
+            List<Person> personList = PersonDB.RetrieveWithInAndLike(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, "b");
+            personList.ForEach(n => Console.WriteLine(n.Name));
+        }
+
         //sql多语句查询，即sql语句有多个返回
         static void RetrieveMultiQuery()
         {
@@ -160,6 +175,35 @@ namespace _017Dapper
             queryResult.Item1.ForEach(n => Console.WriteLine(n.Name + n.Age));
             Console.WriteLine("二元组的第二个分量");
             queryResult.Item2.ForEach(n => Console.WriteLine(n.Name + n.Age));
+        }
+
+        //使用存储过程
+        static void ExecuteStoreProcedure()
+        {
+            List<Person> person = PersonDB.ExecuteStoreProcedure();
+            person.ForEach(n => Console.WriteLine(n.Name));
+        }
+
+        //使用带有参数的存储过程
+        static void ExecuteStoreProcedureWithParam()
+        {
+            Person person = PersonDB.ExecuteStoreProcedureWithParam();
+            Console.WriteLine(person.Name);
+        }
+
+        //使用存储过程实现插入
+        static void ExecuteStoreProcedureInsert()
+        {
+            int affectNum = PersonDB.ExecuteStoreProcedureInsert();
+            Console.WriteLine($"插入:{affectNum == 1}");
+        }
+
+        //重复执行存储过程，插入多条数据
+        static void ExecuteStoreProcudureMoreThanOnce()
+        {
+            List<Person> lists = new List<Person>() { new Person() { Name = "test", Age = 100, ClassId = "1" }, new Person() { Name = "test2", Age = 100, ClassId = "2" } };
+            int affectNum = PersonDB.ExecuteStoreProcudureMoreThanOnce(lists);
+            Console.WriteLine($"受影响行数：{affectNum}");
         }
 
         //使用Dapper查询返回Datatable
