@@ -37,7 +37,8 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                //connection.Open();//我看网上一些博客中是这样写的，但是其实是没有必要的，使用dapper不需要考虑conn是否连接，在执行dapper时自行判断 open状态，如果没有打开它会自己打开
+                //connection.Open();//我看网上一些博客中是这样写的，但是其实是没有必要的，
+                //使用dapper不需要考虑conn是否连接，在执行dapper时自行判断 open状态，如果没有打开它会自己打开
                 //详细可以看SqlMappe.cs中的2796行“ if (wasClosed) cnn.Open();”
                 //Dapper中的Execute执行的方式返回受影响的行数
                 return connection.Execute("insert into Person(Name,Age) values (@Name,@Age)", person);
@@ -155,13 +156,13 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Person>("select * from Person where Id=@Id", person).FirstOrDefault();
+                return connection.Query<Person>("select * from Person where Id=@Id", person).SingleOrDefault();
             }
         }
 
 
         /// <summary>
-        /// 查询条件中使用IN
+        /// 查询条件中使用IN——使用列表类型参数
         /// </summary>
         /// <returns></returns>
         public static List<Person> RetrieveWithIn(int[] argIds)
@@ -205,6 +206,7 @@ namespace _017Dapper.DAL
             }
         }
 
+
         /// <summary>
         /// 多语句操作：sql中多个查询结果集
         /// </summary>
@@ -227,6 +229,46 @@ namespace _017Dapper.DAL
             }
         }
 
+
+        /// <summary>
+        /// 关于First、Single和FirstOrDefault、SingleOrDefault的区分
+        ///  
+        /// 方法	                 |  没有项  |  有一项	   | 有多项
+        /// ---------------------|---------|-----------|-----------
+        /// First()              |  抛异常  |  当前项   |  第一项
+        /// Single()             |  抛异常  |  当前项   |  抛异常
+        /// FirstOrDefault()     |  默认值  |  当前项   |  第一项
+        /// SingleOrDefault()    |  默认值  |  当前项   |  抛异常
+        /// </summary>
+        public static void Test()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Query<Person>("select * from Person order by Age").First();
+                connection.Query<Person>("select * from Person where Id=2").Single();
+                connection.Query<Person>("select * from Person order by Age").FirstOrDefault();
+                connection.Query<Person>("select * from Person where Id=2").SingleOrDefault();
+            }
+        }
+
+
+        /// <summary>
+        /// 查询返回匿名类型
+        /// </summary>
+        public static string RetrieveReturnAnonymousType()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                //返回强类型
+                Person person = connection.Query<Person>("select * from Person where Id=2").First();
+                //Query()方法可以返回匿名对象，其实这里的作用就是和使用匿名对象做参数类似，在没有特定的定义的类用于Dapper参数或接收返回值的时候，可以使用匿名类型
+                var queryResult = connection.Query("select Id ,Name from Person where Id=2").First();
+                return queryResult.Id + ":" + queryResult.Name;//var不能做返回值类型，var不能做参数类型,所以这里将匿名对象的属性分别读取并返回
+            }
+        }
+
+
+        //public static string RetrieveReturn
         #endregion
 
 
@@ -248,13 +290,18 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
+                //1.将执行存储过程定义为sql语句
+                //string sql = " exec pro_GetPerson";   
+                //return connection.Query<Person>(sql).ToList();//默认的commandType参数的是null,可以直接执行sql语句
+
+                //2.直接使用存储过程做为参数
                 string pro = "pro_GetPerson";
                 return connection.Query<Person>(pro, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
         /// <summary>
-        /// 执行有参数的存储过程 获取Person表中指定Id的用户
+        /// 使用匿名类型做参数——执行有参数的存储过程 获取Person表中指定Id的用户
         /// 存储过程如下：
         /// Create PROCEDURE pro_GetPersonWithId
         ///         @Id INT
@@ -268,13 +315,7 @@ namespace _017Dapper.DAL
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                //传参方式1：使用DynamicParameters
-                //string pro = "pro_GetPersonWithId";
-                //DynamicParameters dynamicParameters = new DynamicParameters();//DynamicParameters是Dapper中定义的用于参数化查询的对象
-                //dynamicParameters.Add("@Id", 2);
-                //return connection.Query<Person>(pro, dynamicParameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-
-                //传参方式2：使用匿名对象
+                //传参方式：使用匿名对象
                 //注意这里不可以使用Person对象作为参数 ,因为我们需要的参数就只需要Id，但是Person中还包含其他的属性
                 //若是存储过程只是使用Person的一个属性做参数，则不能使用Person对象做参数
                 //这一点和使用Dapper执行sql语句不一样，使用Dapper执行sql语句，语句中的参数可以可以使用Person对象的部分属性
@@ -284,6 +325,63 @@ namespace _017Dapper.DAL
                 return connection.Query<Person>(pro, new { id = 2 }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
+
+        /// <summary>
+        /// 使用动态参数作为存储过程参数
+        /// Create PROCEDURE pro_GetPersonByIdAndAge
+        ///         @Id INT,
+        ///         @Age INT
+        /// AS
+        /// BEGIN
+        ///     SELECT* FROM Person WHERE Id=@Id AND Age>@Age;
+        /// END
+        /// </summary>
+        /// <returns></returns>
+        public static Person ExecuteStoreProcedureWithDynamicParam()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                //传参方式：使用DynamicParameters
+                string pro = "pro_GetPersonByIdAndAge";
+                DynamicParameters dynamicParameters = new DynamicParameters();//DynamicParameters是Dapper中定义的用于参数化查询的对象
+                dynamicParameters.Add("@Id", 2);
+                dynamicParameters.Add("@Age", 1);
+                return connection.Query<Person>(pro, dynamicParameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 使用动态参数作为sql语句的参数
+        /// </summary>
+        /// <returns></returns>
+        public static Person ExecuteSqlWithDynamicParam()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person where Id=@Id and Age>@Age";
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("@Id", 2);
+                dynamicParameters.Add("@Age", 1);
+                return connection.Query<Person>(sql, dynamicParameters).FirstOrDefault();
+            }
+        }
+
+
+        /// <summary>
+        /// 使用动态参数多次执行sql语句
+        /// </summary>
+        /// <returns></returns>
+        //public static Person ExecuteSqlWithDynamicParamMoreThanOnce()
+        //{
+        //    using (IDbConnection connection=new SqlConnection(connectionString))
+        //    {
+        //        string sql = @"insert into Person (Name,Age,ClassId) values(@Name,@Age,@ClassId)";
+        //        List<DynamicParameters> dynamicParameters = new List<DynamicParameters>();
+        //        SqlParameter sqlParameter = new SqlParameter("@Name",Name);
+        //        //dynamicParameters.Add()
+        //        //connection.Query(sql,
+        //    }
+        //}
 
         /// <summary>
         /// 执行有参存储过程，插入记录
@@ -367,7 +465,7 @@ namespace _017Dapper.DAL
 
 
         /// <summary>
-        /// 标量查询：使用Dapper查询结果为Dictionary类型
+        /// 标量查询：使用Dapper查询结果为int类型
         /// </summary>
         /// <returns></returns>
         public static int QueryReturnInt()
@@ -383,6 +481,7 @@ namespace _017Dapper.DAL
         #endregion
 
 
+        #region Dapper 连接查询
 
         /// <summary>
         /// 连接查询
@@ -409,6 +508,7 @@ namespace _017Dapper.DAL
         //        string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
         //       // return connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(sql, (personWithClass2, schoolClass) => { personWithClass2.SchoolClass = schoolClass; return personWithClass2; });
         //    }
-        //}
+        //} 
+        #endregion
     }
 }

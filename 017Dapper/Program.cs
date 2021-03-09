@@ -7,12 +7,14 @@ using System.Linq;
 
 
 #region 说明
+///0. 教程：https://dapper-tutorial.net/dapper
 ///0. 参考：https://github.com/StackExchange/Dapper
 ///0. 参考：https://www.cnblogs.com/huangxincheng/p/5832281.html
 ///0. 参考：https://www.cnblogs.com/flywong/p/9666963.html
 ///0. 参考：https://blog.csdn.net/qq_39360549/article/details/85291270
 ///0. 参考：https://www.cnblogs.com/pengze0902/p/6523458.html
 ///0. 参考：https://esofar.gitbooks.io/dapper-tutorial-cn/content/utilities/stored-procedure.html
+///0. *参考：https://www.jianshu.com/p/e201e6a6870c
 ///1. 安装dapper:nuget>install-package dapper
 ///2. 定义一个Person类，有三个属性：Id,Name,Age,ClassId
 ///3. 定义一个Person表，有三个字段：Id,Name,Age,ClassId
@@ -46,6 +48,8 @@ namespace _017Dapper
             //RetrievePersonWithLike();
             //RetrievePersonWithLikeAndIn();
             //RetrieveMultiQuery();
+            RetrieveReturnAnonymousType();
+
             //QueryDataTable();
             //QueryDictionary();
             //QueryInt();
@@ -54,8 +58,10 @@ namespace _017Dapper
             //执行存成过程
             //ExecuteStoreProcedure();
             //ExecuteStoreProcedureWithParam();
+            //ExecuteStoreProcedureWithDynamicParam();
+            //ExecuteSqlWithDynamicParam();
             //ExecuteStoreProcedureInsert();
-            ExecuteStoreProcudureMoreThanOnce();
+            //ExecuteStoreProcudureMoreThanOnce();
             Console.ReadKey();
         }
 
@@ -177,6 +183,13 @@ namespace _017Dapper
             queryResult.Item2.ForEach(n => Console.WriteLine(n.Name + n.Age));
         }
 
+        //查询结果为匿名类型
+        static void RetrieveReturnAnonymousType()
+        {
+            string result = PersonDB.RetrieveReturnAnonymousType();
+            Console.WriteLine(result);
+        }
+
         //使用存储过程
         static void ExecuteStoreProcedure()
         {
@@ -189,6 +202,20 @@ namespace _017Dapper
         {
             Person person = PersonDB.ExecuteStoreProcedureWithParam();
             Console.WriteLine(person.Name);
+        }
+
+        //使用动态参数执行存储过程
+        static void ExecuteStoreProcedureWithDynamicParam()
+        {
+            Person person = PersonDB.ExecuteStoreProcedureWithDynamicParam();
+            Console.WriteLine(person.Name + ":" + person.Age);
+        }
+
+        //使用动态参数执行sql
+        static void ExecuteSqlWithDynamicParam()
+        {
+            Person person = PersonDB.ExecuteSqlWithDynamicParam();
+            Console.WriteLine(person.Name+":"+person.Age);
         }
 
         //使用存储过程实现插入
@@ -225,7 +252,7 @@ namespace _017Dapper
             //Dictionary可以看作是KeyValuePair类型的集合
         }
 
-        // 使用Dapper查询返回Int类型
+        //使用Dapper查询返回Int类型
         static void QueryInt()
         {
             Console.WriteLine($"table count={PersonDB.QueryReturnInt()}");
