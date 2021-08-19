@@ -53,9 +53,11 @@ namespace _014使用newtonjson.Controllers
         {
 
             //这里我是测试一下使用NewtonJson序列化DataTable
-            //随便在数据中找张表，只要表中有name和age字段即可
-            string sql = "select * from szmBank ";
-            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            DataTable dt = new DataTable("Student");
+            dt.Columns.Add("Id");
+            dt.Columns.Add("Name");
+            dt.Rows.Add(new object[] { 1, "张三" });
+            dt.Rows.Add(new object[] { 2, "李四" });
             var jsonResult = new JsonNetResult() { Data = dt };
             return new JsonNetResult() { Data = dt };
         }
@@ -65,8 +67,11 @@ namespace _014使用newtonjson.Controllers
         //2.new JsonNetResult() { Data = dt ,JsonRequestBehavior.AllowGet };这样写编译无法通过，显示：初始值设定项成员声明符无效
         public ActionResult TestGet()
         {
-            string sql = "select * from szmBank ";
-            DataTable dt = SqlHelper.GetDataTable(sql, CommandType.Text);
+            DataTable dt = new DataTable("Student");
+            dt.Columns.Add("Id");
+            dt.Columns.Add("Name");
+            dt.Rows.Add(new object[] { 1, "张三" });
+            dt.Rows.Add(new object[] { 2, "李四" });
             // return new JsonNetResult() { Data = dt ,JsonRequestBehavior.AllowGet };
             return new JsonNetResult() { Data = dt };
         }
