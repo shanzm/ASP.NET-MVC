@@ -9,6 +9,9 @@ using System.Web.Mvc;
 ///NuGet:Install-Package log4net -Version 2.0.8
 ///自己在Web.config中添加配置
 ///每个Controller中声明一个ILog对象
+///
+///注意我们可以为log4net单独写一个配置文件log4net.config，而不是写在Web.config中
+///然后在项目的Properties/AssemblyInfo.cs中添加一句：[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 
 namespace _008Log4Net.Controllers
 {
