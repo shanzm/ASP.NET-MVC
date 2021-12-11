@@ -2,10 +2,6 @@
 using Quartz.Impl;
 using Quartz.Spi;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace _012_任务调度框架_Quartz.NET
@@ -19,7 +15,7 @@ namespace _012_任务调度框架_Quartz.NET
             //AtHourAndMinute();
 
             //PackageJob();
-       
+
             for (int i = 0; i < 100; i++)
             {
                 System.Threading.Thread.Sleep(1000);
