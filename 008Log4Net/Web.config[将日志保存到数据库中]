@@ -5,7 +5,7 @@
   -->
 
 <configuration>
-
+	<!--参考官方文档：https://logging.apache.org/log4net/release/config-examples.html-->
 	<!-- ...................................为Log4Net添加的配置.....开始.................................-->
 	<!--保存到数据库日志表的建表语句
 	CREATE TABLE [dbo].[Log4net](
@@ -17,11 +17,7 @@
 	[Message] [NVARCHAR](MAX) NULL,
 	[Exception] [NVARCHAR](MAX) NULL,
 	[CreateTime] [DATETIME] NULL
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-	GO
-
-	ALTER TABLE [dbo].[Log4net] ADD  CONSTRAINT [DF_Log4net_CreateTime]  DEFAULT (GETDATE()) FOR [CreateTime]
-	GO
+	)
 	-->
 	<configSections>
 		<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler,log4net" />
