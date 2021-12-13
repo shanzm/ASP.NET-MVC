@@ -33,9 +33,9 @@ namespace _018Topshelf_log4net_quartz.net
 
                 x.Service<MyServiceRunner>();
 
-                x.SetDescription("QuartzDemo服务描述");
-                x.SetDisplayName("QuartzDemo服务显示名称");
-                x.SetServiceName("QuartzDemo服务名称");
+                x.SetDescription("服务描述");
+                x.SetDisplayName("服务显示名称");
+                x.SetServiceName("服务名称");
 
                 x.EnablePauseAndContinue();
             });
