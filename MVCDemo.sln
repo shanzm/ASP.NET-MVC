@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "018Topshelf", "018Topshelf\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "018Topshelf+log4net+quartz.net", "018Topshelf+log4net+quartz.net\018Topshelf+log4net+quartz.net.csproj", "{311E8CF1-69F9-49BE-BB29-BEDD838AEFCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "017Dapper2", "017Dapper2\017Dapper2.csproj", "{298F97FB-7D45-4384-AB9A-3A293C07E2AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +185,10 @@ Global
 		{311E8CF1-69F9-49BE-BB29-BEDD838AEFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{311E8CF1-69F9-49BE-BB29-BEDD838AEFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{311E8CF1-69F9-49BE-BB29-BEDD838AEFCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{298F97FB-7D45-4384-AB9A-3A293C07E2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{298F97FB-7D45-4384-AB9A-3A293C07E2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{298F97FB-7D45-4384-AB9A-3A293C07E2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{298F97FB-7D45-4384-AB9A-3A293C07E2AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

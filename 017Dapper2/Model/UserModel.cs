@@ -2,6 +2,9 @@
 using System;
 
 #region 说明
+//Dapper本身不需要我们对实体类做任何的配置，
+//这里的所有配置都是为了使用Dapper.Contrib.Extensions
+
 //Table：指定实体对应地数据库表名，可忽略，但是忽略后实体对应地数据库表名会在末尾加个s，Demo对应Demos
 
 //Key：指定此列为主键（自动增长主键），可忽略，忽略后默认查找
@@ -19,7 +22,7 @@ using System;
 
 namespace _017Dapper2
 {
-    [Table("[User]")]//注意这里映射到的表User表的表名是关键字，需要使用方括号转义
+    [Table("[User]")]//注意这里映射到的表User表的表名是关键字，需要使用方括号转义，否则报错：“在关键字 'User' 附近有语法错误。”
     public class UserModel
     {
         [Key]//不是自动增长主键时使用ExplicitKey

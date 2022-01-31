@@ -7,6 +7,8 @@ namespace _017Dapper2
     public class UserService : BaseDAL<UserModel>
     {
 
+        //说明：BaseDAL中没有的方法可以在这里自行定义，可以依赖Dapper.Extensions中对对象的操作
+
         /// <summary>
         /// 在事务中同时插入User和Department表
         /// </summary>
@@ -34,5 +36,8 @@ namespace _017Dapper2
                 }
             }
         }
+
+
+        //说明：复杂的SQL查询可以在这里使用DapperHelper中封装的方法
     }
 }

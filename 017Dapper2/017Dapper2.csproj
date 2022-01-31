@@ -50,8 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dal\BaseDAL.cs" />
-    <Compile Include="Dal\DapperHelper.cs" />
+    <Compile Include="Dal\BaseService.cs" />
+    <Compile Include="Dal\ConnectionInstance.cs" />
+    <Compile Include="Dal\DapperSqlHelper.cs" />
     <Compile Include="Model\DepartmentModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Program.cs" />

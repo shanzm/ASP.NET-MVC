@@ -222,7 +222,6 @@ namespace _017Dapper.DAL
                 List<Person> persons1 = queryResult.Read<Person>().ToList();//接收第一个select查询的结果
                 List<Person> persons2 = queryResult.Read<Person>().ToList();//接收第二个select查询的结果
 
-
                 //使用元祖（C#6.0语法）实现一个函数返回多个返回值
                 Tuple<List<Person>, List<Person>> tupleListPerson = new Tuple<List<Person>, List<Person>>(persons1, persons2);
                 return tupleListPerson;

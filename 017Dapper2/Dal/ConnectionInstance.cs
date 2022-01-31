@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace _017Dapper2
 {
-    public class DapperHelper
+    public class ConnectionInstance
     {
         /// 数据库连接名
         private static string _connection = string.Empty;
@@ -20,14 +20,14 @@ namespace _017Dapper2
         private static IDbConnection dbConnection = null;
 
         /// 静态变量保存类的实例        
-        private static DapperHelper uniqueInstance;
+        private static ConnectionInstance uniqueInstance;
 
         /// 定义一个标识确保线程同步        
         private static readonly object locker = new object();
         /// <summary>
         /// 私有构造方法，使外界不能创建该类的实例，以便实现单例模式
         /// </summary>
-        private DapperHelper()
+        private ConnectionInstance()
         {
             _connection = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
         }
@@ -36,7 +36,7 @@ namespace _017Dapper2
         /// 获取实例，这里为单例模式，保证只存在一个实例
         /// </summary>
         /// <returns></returns>
-        public static DapperHelper GetInstance()
+        public static ConnectionInstance GetInstance()
         {
             // 双重锁定实现单例模式，在外层加个判空条件主要是为了减少加锁、释放锁的不必要的损耗
             if (uniqueInstance == null)
@@ -45,7 +45,7 @@ namespace _017Dapper2
                 {
                     if (uniqueInstance == null)
                     {
-                        uniqueInstance = new DapperHelper();
+                        uniqueInstance = new ConnectionInstance();
                     }
                 }
             }

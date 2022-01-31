@@ -47,8 +47,8 @@ namespace _017Dapper
             //RetrievePersonWithIn();
             //RetrievePersonWithLike();
             //RetrievePersonWithLikeAndIn();
-            //RetrieveMultiQuery();
-            RetrieveReturnAnonymousType();
+            RetrieveMultiQuery();
+            //RetrieveReturnAnonymousType();
 
             //QueryDataTable();
             //QueryDictionary();

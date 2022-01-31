@@ -8,7 +8,8 @@ using System.Reflection;
 namespace _017Dapper2
 {
     /// <summary>
-    /// 数据库访问基类
+    /// 对象数据库访问基类
+    /// 其中连接对象来自ConnectionInstance类
     /// </summary>
     /// <typeparam name="T">实体类类型</typeparam>
     public partial class BaseDAL<T> where T : class
@@ -21,8 +22,8 @@ namespace _017Dapper2
             get
             {
                 //创建单一实例
-                DapperHelper.GetInstance();
-                return DapperHelper.OpenCurrentDbConnection();
+                ConnectionInstance.GetInstance();
+                return ConnectionInstance.OpenCurrentDbConnection();
             }
         }
 
