@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-
 #region 说明
+
 ///0. 教程：https://dapper-tutorial.net/dapper
 ///0. 参考：https://github.com/StackExchange/Dapper
 ///0. 参考：https://www.cnblogs.com/huangxincheng/p/5832281.html
@@ -20,13 +20,14 @@ using System.Linq;
 ///3. 定义一个Person表，有三个字段：Id,Name,Age,ClassId
 ///4. 定义一个Class类，有三个属性：ClassId,ClassName,ClassAddress，同时创建与之对应的table
 ///5. 定义一个PersonDB类，操作Person表
+
 #endregion
 
 namespace _017Dapper
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //测试插入数据
             //InsertPerson();
@@ -47,13 +48,15 @@ namespace _017Dapper
             //RetrievePersonWithIn();
             //RetrievePersonWithLike();
             //RetrievePersonWithLikeAndIn();
-            RetrieveMultiQuery();
+            //RetrieveMultiQuery();
             //RetrieveReturnAnonymousType();
 
             //QueryDataTable();
             //QueryDictionary();
             //QueryInt();
             //QueryWithJoin();
+            //QueryWithJoin2();
+            QueryWithJoin3();
 
             //执行存成过程
             //ExecuteStoreProcedure();
@@ -65,10 +68,8 @@ namespace _017Dapper
             Console.ReadKey();
         }
 
-
-
         //插入一条Person记录
-        static void InsertPerson()
+        private static void InsertPerson()
         {
             Person person = new Person() { Name = "Tom", Age = 20 };
             int effectNum = PersonDB.Insert(person);
@@ -76,7 +77,7 @@ namespace _017Dapper
         }
 
         //插入多条Person记录
-        static void InsertPersons()
+        private static void InsertPersons()
         {
             List<Person> persons = new List<Person>()
             {
@@ -88,7 +89,7 @@ namespace _017Dapper
         }
 
         //插入返回自增iD
-        static void InsertWithId()
+        private static void InsertWithId()
         {
             Person person = new Person() { Name = "Bill", Age = 14 };
             int Id = PersonDB.InsertWithId(person);
@@ -96,7 +97,7 @@ namespace _017Dapper
         }
 
         //更新用户名
-        static void UpdateName()
+        private static void UpdateName()
         {
             Person person = new Person() { Id = 1, Name = "汤姆" };
             int effectNum = PersonDB.Update(person);
@@ -104,7 +105,7 @@ namespace _017Dapper
         }
 
         //更新用户年龄
-        static void UpdateAge()
+        private static void UpdateAge()
         {
             List<Person> persons = new List<Person>()
            {
@@ -116,7 +117,7 @@ namespace _017Dapper
         }
 
         //删除指定ID的person
-        static void DeletePersonById()
+        private static void DeletePersonById()
         {
             Person person = new Person() { Id = 1 };
             int effectNum = PersonDB.Delete(person);
@@ -124,7 +125,7 @@ namespace _017Dapper
         }
 
         //根据ID批量删除Person记录
-        static void DeletePersonsById()
+        private static void DeletePersonsById()
         {
             List<Person> persons = new List<Person>()
             {
@@ -136,14 +137,14 @@ namespace _017Dapper
         }
 
         //无参查询
-        static void RetrievePersons()
+        private static void RetrievePersons()
         {
             var persons = PersonDB.Retrieve();
             persons.ForEach(n => Console.WriteLine(n.Name));
         }
 
         //根据ID查询person
-        static void RetrievePersonById()
+        private static void RetrievePersonById()
         {
             Person person = new Person() { Id = 3 };
             Person personResult = PersonDB.Retrieve(person);
@@ -151,7 +152,7 @@ namespace _017Dapper
         }
 
         //sql中查询条件使用in
-        static void RetrievePersonWithIn()
+        private static void RetrievePersonWithIn()
         {
             int[] argIds = { 4, 5 };
             List<Person> persons = PersonDB.RetrieveWithIn(argIds);
@@ -159,7 +160,7 @@ namespace _017Dapper
         }
 
         //sql中使用like模糊查询
-        static void RetrievePersonWithLike()
+        private static void RetrievePersonWithLike()
         {
             string partName = "b";
             List<Person> persons = PersonDB.RetrieveWithLike(partName);
@@ -167,14 +168,14 @@ namespace _017Dapper
         }
 
         //sql中使用in和模糊查询
-        static void RetrievePersonWithLikeAndIn()
+        private static void RetrievePersonWithLikeAndIn()
         {
             List<Person> personList = PersonDB.RetrieveWithInAndLike(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, "b");
             personList.ForEach(n => Console.WriteLine(n.Name));
         }
 
         //sql多语句查询，即sql语句有多个返回
-        static void RetrieveMultiQuery()
+        private static void RetrieveMultiQuery()
         {
             var queryResult = PersonDB.GetMultiQuery();
             Console.WriteLine("二元组的第一个分量");
@@ -184,49 +185,49 @@ namespace _017Dapper
         }
 
         //查询结果为匿名类型
-        static void RetrieveReturnAnonymousType()
+        private static void RetrieveReturnAnonymousType()
         {
             string result = PersonDB.RetrieveReturnAnonymousType();
             Console.WriteLine(result);
         }
 
         //使用存储过程
-        static void ExecuteStoreProcedure()
+        private static void ExecuteStoreProcedure()
         {
             List<Person> person = PersonDB.ExecuteStoreProcedure();
             person.ForEach(n => Console.WriteLine(n.Name));
         }
 
         //使用带有参数的存储过程
-        static void ExecuteStoreProcedureWithParam()
+        private static void ExecuteStoreProcedureWithParam()
         {
             Person person = PersonDB.ExecuteStoreProcedureWithParam();
             Console.WriteLine(person.Name);
         }
 
         //使用动态参数执行存储过程
-        static void ExecuteStoreProcedureWithDynamicParam()
+        private static void ExecuteStoreProcedureWithDynamicParam()
         {
             Person person = PersonDB.ExecuteStoreProcedureWithDynamicParam();
             Console.WriteLine(person.Name + ":" + person.Age);
         }
 
         //使用动态参数执行sql
-        static void ExecuteSqlWithDynamicParam()
+        private static void ExecuteSqlWithDynamicParam()
         {
             Person person = PersonDB.ExecuteSqlWithDynamicParam();
-            Console.WriteLine(person.Name+":"+person.Age);
+            Console.WriteLine(person.Name + ":" + person.Age);
         }
 
         //使用存储过程实现插入
-        static void ExecuteStoreProcedureInsert()
+        private static void ExecuteStoreProcedureInsert()
         {
             int affectNum = PersonDB.ExecuteStoreProcedureInsert();
             Console.WriteLine($"插入:{affectNum == 1}");
         }
 
         //重复执行存储过程，插入多条数据
-        static void ExecuteStoreProcudureMoreThanOnce()
+        private static void ExecuteStoreProcudureMoreThanOnce()
         {
             List<Person> lists = new List<Person>() { new Person() { Name = "test", Age = 100, ClassId = "1" }, new Person() { Name = "test2", Age = 100, ClassId = "2" } };
             int affectNum = PersonDB.ExecuteStoreProcudureMoreThanOnce(lists);
@@ -234,7 +235,7 @@ namespace _017Dapper
         }
 
         //使用Dapper查询返回Datatable
-        static void QueryDataTable()
+        private static void QueryDataTable()
         {
             DataTable dtPerson = PersonDB.QueryReturnDataTable();
             foreach (DataRow dr in dtPerson.Rows)
@@ -244,7 +245,7 @@ namespace _017Dapper
         }
 
         //使用Dapper查询返回Dictionary
-        static void QueryDictionary()
+        private static void QueryDictionary()
         {
             Dictionary<int, int> keyValuePairs = PersonDB.QueryReturnDictionary();
             Array.ForEach(keyValuePairs.ToArray(), n => Console.WriteLine($"Id:{n.Key},Age:{n.Value}"));
@@ -253,16 +254,30 @@ namespace _017Dapper
         }
 
         //使用Dapper查询返回Int类型
-        static void QueryInt()
+        private static void QueryInt()
         {
             Console.WriteLine($"table count={PersonDB.QueryReturnInt()}");
         }
 
         //连接查询
-        static void QueryWithJoin()
+        private static void QueryWithJoin()
         {
             List<PersonWithClass> listPersonWithClass = PersonDB.QuerywithJoin();
             listPersonWithClass.ForEach(item => Console.WriteLine(item.Name + " " + item.ClassName));
+        }
+
+        //连接查询，多表连接
+        private static void QueryWithJoin2()
+        {
+            List<PersonWithClass2> personWithClass2s = PersonDB.QueryWithJoin2();
+            personWithClass2s.ForEach(n => Console.WriteLine(n.Name + " " + n.schoolClass.ClassName));
+        }
+
+        //连接查询
+        private static void QueryWithJoin3()
+        {
+            List<PersonWithClass> personWithClasses = PersonDB.QueryWithJoin3();
+            personWithClasses.ForEach(n => Console.WriteLine(n.ClassName));
         }
     }
 }

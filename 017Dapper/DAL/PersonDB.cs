@@ -15,7 +15,6 @@ namespace _017Dapper.DAL
         /// </summary>
         private static readonly string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connStr"].ToString();
 
-
         #region Dapper 中的Excuse
 
         ///Dapper.NET是一个简单的ORM，专门从SQL查询结果中快速生成对象
@@ -45,7 +44,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 批量插入Person记录
         /// </summary>
@@ -58,7 +56,6 @@ namespace _017Dapper.DAL
                 return connection.Execute("insert into Person(Name,Age) values(@Name,@Age)", persons);
             }
         }
-
 
         /// <summary>
         /// 插入一条Person记录返回自增ID
@@ -74,7 +71,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 删除一条Person记录
         /// </summary>
@@ -88,7 +84,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 批量删除Person记录
         /// </summary>
@@ -100,7 +95,6 @@ namespace _017Dapper.DAL
                 return connection.Execute("delete from Person where Id=@Id", persons);
             }
         }
-
 
         /// <summary>
         /// 根据ID更新Person的Name
@@ -114,7 +108,6 @@ namespace _017Dapper.DAL
                 return connection.Execute("update Person set Name=@Name where Id=@Id", person);
             }
         }
-
 
         /// <summary>
         /// 根据ID批量更新用户年龄
@@ -131,7 +124,6 @@ namespace _017Dapper.DAL
 
         #endregion
 
-
         #region Dapper 中的Query
 
         /// <summary>
@@ -146,7 +138,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 根据person id 查询person
         /// </summary>
@@ -160,7 +151,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 查询条件中使用IN——使用列表类型参数
         /// </summary>
@@ -171,10 +161,8 @@ namespace _017Dapper.DAL
             {
                 string sql = "select * from Person where Id in @Ids";
                 return connection.Query<Person>(sql, new { Ids = argIds }).ToList();
-
             }
         }
-
 
         /// <summary>
         /// 使用like模糊查询
@@ -188,7 +176,6 @@ namespace _017Dapper.DAL
                 return connection.Query<Person>("select * from person where name like @name", new { name = $"%{partName}%" }).ToList();
             }
         }
-
 
         /// <summary>
         /// 同时使用in和模糊查询
@@ -205,7 +192,6 @@ namespace _017Dapper.DAL
                 return personList;
             }
         }
-
 
         /// <summary>
         /// 多语句操作：sql中多个查询结果集
@@ -228,10 +214,9 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 关于First、Single和FirstOrDefault、SingleOrDefault的区分
-        ///  
+        ///
         /// 方法	                 |  没有项  |  有一项	   | 有多项
         /// ---------------------|---------|-----------|-----------
         /// First()              |  抛异常  |  当前项   |  第一项
@@ -250,7 +235,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 查询返回匿名类型
         /// </summary>
@@ -266,13 +250,11 @@ namespace _017Dapper.DAL
             }
         }
 
-
         //public static string RetrieveReturn
+
         #endregion
 
-
         #region Dapper 中执行存储过程
-
 
         /// <summary>
         ///  执行无参数的存储过程
@@ -290,7 +272,7 @@ namespace _017Dapper.DAL
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 //1.将执行存储过程定义为sql语句
-                //string sql = " exec pro_GetPerson";   
+                //string sql = " exec pro_GetPerson";
                 //return connection.Query<Person>(sql).ToList();//默认的commandType参数的是null,可以直接执行sql语句
 
                 //2.直接使用存储过程做为参数
@@ -365,7 +347,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 使用动态参数多次执行sql语句
         /// </summary>
@@ -389,7 +370,7 @@ namespace _017Dapper.DAL
         /// @Age int,
         /// @ClassId nvarchar(50)=null
         /// AS
-        /// BEGIN 
+        /// BEGIN
         /// 	insert into Person(Name, Age, ClassId) values(@Name, @Age, @ClassId)
         /// END
         /// </summary>
@@ -428,7 +409,6 @@ namespace _017Dapper.DAL
 
         #endregion
 
-
         #region Dapper 查询返回其他一般类型
 
         /// <summary>
@@ -448,7 +428,6 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 使用Dapper查询结果为Dictionary类型
         /// </summary>
@@ -461,7 +440,6 @@ namespace _017Dapper.DAL
                 return dicPerson;
             }
         }
-
 
         /// <summary>
         /// 标量查询：使用Dapper查询结果为int类型
@@ -479,11 +457,11 @@ namespace _017Dapper.DAL
 
         #endregion
 
-
         #region Dapper 连接查询
 
         /// <summary>
         /// 连接查询
+        /// 对实体扩展，添加需要的属性，从而接收查询的结果
         /// </summary>
         public static List<PersonWithClass> QuerywithJoin()
         {
@@ -495,19 +473,46 @@ namespace _017Dapper.DAL
             }
         }
 
-
         /// <summary>
         /// 连接查询
         /// </summary>
         /// <returns></returns>
-        //public static List<PersonWithClass2> QueryWithJoin()
-        //{
-        //    using (IDbConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
-        //       // return connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(sql, (personWithClass2, schoolClass) => { personWithClass2.SchoolClass = schoolClass; return personWithClass2; });
-        //    }
-        //} 
+        ///一般一个表对应一个实体，若是连接查询，则返回的所有字段单独构造一个实体类是笨的
+        ///将子类作为主类实体的一个属性
+        public static List<PersonWithClass2> QueryWithJoin2()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
+                //注意这里的泛型Query，第一个类型是查询结果的第一类型，第二个类型是查询结果的第二类型，最后一个是返回类型
+                //注意这里是有多重重载的，可以实现多表（不只是两个）表的连接查询
+                //若是多表连接则splitOn参数格式：splitOn: "param1,param2...."
+                List<PersonWithClass2> personWithClass2s = connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(
+                    sql,
+                    (personWithClass2, schoolClass) => { personWithClass2.schoolClass = schoolClass; return personWithClass2; },
+                    splitOn: "ClassId").ToList();//参数splitOn是sql语句中两个实体字段的分隔的第一个字段
+
+                return personWithClass2s;
+            }
+        }
+
+        /// <summary>
+        /// 连接查询
+        /// 还可以是使用Query返回的IEnumber<dynamic>类型接收，
+        /// </summary>
+        /// <returns></returns>
+        public static List<PersonWithClass> QueryWithJoin3()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "select * from Person left join Class on Person.ClassId=Class.ClassId";
+                IEnumerable<dynamic> result = connection.Query(sql);
+                List<PersonWithClass> personWithClasses = result.ToList().Select(n => new PersonWithClass() { Id = n.Id, Age = n.Age, Name = n.Name, ClassId = n.ClassId, ClassName = n.ClassName, ClassAddress = n.ClassAddress }).ToList();
+
+                return personWithClasses;
+            }
+        }
+
         #endregion
     }
 }
