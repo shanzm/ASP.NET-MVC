@@ -487,6 +487,7 @@ namespace _017Dapper.DAL
                 //注意这里的泛型Query，第一个类型是查询结果的第一类型，第二个类型是查询结果的第二类型，最后一个是返回类型
                 //注意这里是有多重重载的，可以实现多表（不只是两个）表的连接查询
                 //若是多表连接则splitOn参数格式：splitOn: "param1,param2...."
+                //参考：https://blog.csdn.net/qq_34550459/article/details/106538980
                 List<PersonWithClass2> personWithClass2s = connection.Query<PersonWithClass2, SchoolClass, PersonWithClass2>(
                     sql,
                     (personWithClass2, schoolClass) => { personWithClass2.schoolClass = schoolClass; return personWithClass2; },
